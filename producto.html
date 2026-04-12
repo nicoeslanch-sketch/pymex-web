@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto | Analixia Pyme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/products.js" defer></script>
+<script src="assets/script.js" defer></script>
+
+</head>
+<body>
+<div class="page">
+  <div id="site-nav"></div>
+  
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumbs">Inicio / Plantillas / <span id="product-breadcrumb">Detalle</span></div>
+    <div class="small-label">Detalle del producto</div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:12px">
+  <div class="container" id="product-detail"></div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  renderProductDetail();
+});
+</script>
+
+  <div id="site-footer"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  renderNav('plantillas');
+  renderFooter();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantillas | Analixia Pyme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/products.js" defer></script>
+<script src="assets/script.js" defer></script>
+
+</head>
+<body>
+<div class="page">
+  <div id="site-nav"></div>
+  
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumbs">Inicio / Plantillas</div>
+    <div class="small-label">Tienda</div>
+    <h1>Plantillas para<br><span class="gold">Analixia Pyme</span></h1>
+    <p>Catálogo inicial de productos digitales. Cada plantilla tiene su propia página con imágenes, detalle y estructura preparada para crecer.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:34px">
+  <div class="container">
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px">
+      <button class="btn btn-secondary active" data-filter="todos">Todas</button>
+      <button class="btn btn-secondary" data-filter="gestión">Gestión</button>
+      <button class="btn btn-secondary" data-filter="contabilidad">Contabilidad</button>
+      <button class="btn btn-secondary" data-filter="estado">Estados</button>
+      <button class="btn btn-secondary" data-filter="liquidez">Liquidez</button>
+      <button class="btn btn-secondary" data-filter="operación">Operación</button>
+    </div>
+    <div id="catalog-products" class="catalog-grid"></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div id="bundle-shop"></div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  renderCatalog('catalog-products');
+  setupFilters('[data-filter]', '#catalog-products');
+  renderBundle('bundle-shop');
+});
+</script>
+
+  <div id="site-footer"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  renderNav('plantillas');
+  renderFooter();
+});
+</script>
+</body>
+</html>

@@ -1,882 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PymeX — Herramientas financieras para PyMEs</title>
+<title>Analixia Pyme | Plantillas empresariales</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-/* ── RESET & TOKENS ─────────────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:       #0A0E17;
-  --bg2:      #111827;
-  --bg3:      #1C2433;
-  --accent:   #2563EB;
-  --accent2:  #3B82F6;
-  --gold:     #F59E0B;
-  --green:    #10B981;
-  --red:      #EF4444;
-  --text:     #F1F5F9;
-  --muted:    #94A3B8;
-  --border:   rgba(255,255,255,0.08);
-  --card:     rgba(255,255,255,0.04);
-  --ff-h:     'Syne',sans-serif;
-  --ff-b:     'DM Sans',sans-serif;
-  --r:        12px;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--ff-b);font-size:16px;line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/products.js" defer></script>
+<script src="assets/script.js" defer></script>
 
-/* ── UTILS ──────────────────────────────────────────────────── */
-.container{max-width:1160px;margin:0 auto;padding:0 24px}
-.section{padding:96px 0}
-.label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px}
-.label::before{content:'';display:block;width:24px;height:1px;background:var(--accent2)}
-h1,h2,h3,h4{font-family:var(--ff-h);line-height:1.15}
-h1{font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800}
-h2{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700}
-h3{font-size:1.2rem;font-weight:600}
-.muted{color:var(--muted)}
-.accent{color:var(--accent2)}
-.gold{color:var(--gold)}
-
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--r);
-  font-family:var(--ff-b);font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;border:none}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-outline:hover{border-color:var(--accent2);color:var(--accent2)}
-.btn-gold{background:var(--gold);color:#0A0E17;font-weight:700}
-.btn-gold:hover{filter:brightness(1.1);transform:translateY(-2px)}
-.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);font-size:13px;padding:9px 18px}
-.btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
-
-/* noise */
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:.4}
-section,nav,footer{position:relative;z-index:1}
-
-/* fade-up */
-.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
-.fade-up.visible{opacity:1;transform:none}
-.fade-up.d1{transition-delay:.1s}.fade-up.d2{transition-delay:.2s}.fade-up.d3{transition-delay:.3s}
-
-/* ── NAV ─────────────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all .3s}
-nav.scrolled{background:rgba(10,14,23,.93);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);padding:13px 0}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-logo{font-family:var(--ff-h);font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
-.nav-logo span{color:var(--accent2)}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-size:14px;color:var(--muted);transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{display:flex;gap:10px;align-items:center}
-.nav-badge{font-size:11px;background:rgba(245,158,11,.15);color:var(--gold);
-  border:1px solid rgba(245,158,11,.3);border-radius:99px;padding:3px 10px;font-weight:500}
-@media(max-width:768px){.nav-links{display:none}}
-
-/* ── HERO ────────────────────────────────────────────────────── */
-#hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative;overflow:hidden}
-.glow{position:absolute;border-radius:50%;pointer-events:none}
-.glow-1{width:700px;height:700px;
-  background:radial-gradient(circle,rgba(37,99,235,.22) 0%,transparent 70%);
-  top:-200px;right:-150px}
-.glow-2{width:500px;height:500px;
-  background:radial-gradient(circle,rgba(245,158,11,.1) 0%,transparent 70%);
-  bottom:-100px;left:-100px}
-
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.28);
-  border-radius:99px;padding:6px 16px;font-size:13px;color:var(--accent2);margin-bottom:28px}
-.pulse{width:6px;height:6px;border-radius:50%;background:var(--accent2);
-  animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
-.hero-title em{font-style:normal;color:var(--accent2)}
-.hero-sub{font-size:1.1rem;color:var(--muted);max-width:540px;margin:20px 0 36px;line-height:1.75}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
-
-.hero-stats{display:flex;gap:36px;flex-wrap:wrap;padding-top:36px;border-top:1px solid var(--border)}
-.stat-n{font-family:var(--ff-h);font-size:1.9rem;font-weight:800}
-.stat-l{font-size:12px;color:var(--muted);margin-top:2px}
-
-/* ── PHASE BANNER ────────────────────────────────────────────── */
-.phase-banner{
-  background:linear-gradient(90deg,rgba(245,158,11,.08),rgba(37,99,235,.08));
-  border:1px solid rgba(245,158,11,.2);border-radius:16px;
-  padding:28px 36px;margin:0 0 80px;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.phase-banner-left h3{margin-bottom:6px}
-.phase-banner-left p{font-size:14px;color:var(--muted);max-width:480px;line-height:1.6}
-.phase-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.phase-step{display:flex;align-items:center;gap:6px;font-size:13px}
-.phase-dot{width:8px;height:8px;border-radius:50%}
-.phase-sep{color:var(--muted);font-size:12px}
-
-/* ── TIENDA ──────────────────────────────────────────────────── */
-.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:52px}
-
-.product-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;
-  transition:border-color .25s,transform .25s;
-  display:flex;flex-direction:column}
-.product-card:hover{border-color:rgba(37,99,235,.4);transform:translateY(-4px)}
-.product-card.featured{border-color:var(--gold)}
-
-.product-preview{
-  height:160px;display:flex;align-items:center;justify-content:center;
-  background:var(--bg3);position:relative;overflow:hidden}
-.product-preview-inner{
-  width:calc(100% - 32px);background:var(--bg2);border-radius:8px;
-  padding:12px;border:1px solid var(--border)}
-.pp-row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
-.pp-label{font-size:9px;color:var(--muted);min-width:80px}
-.pp-bar{height:6px;border-radius:3px;flex:1}
-.pp-val{font-size:9px;font-weight:600;min-width:40px;text-align:right}
-.product-badge{
-  position:absolute;top:12px;right:12px;
-  font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px}
-.badge-new{background:var(--accent);color:#fff}
-.badge-hot{background:var(--gold);color:#0A0E17}
-.badge-free{background:var(--green);color:#fff}
-
-.product-body{padding:20px;flex:1;display:flex;flex-direction:column}
-.product-cat{font-size:11px;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.08em;margin-bottom:8px}
-.product-name{font-family:var(--ff-h);font-size:1.05rem;font-weight:700;margin-bottom:8px}
-.product-desc{font-size:13px;color:var(--muted);line-height:1.6;flex:1;margin-bottom:16px}
-.product-includes{display:flex;flex-direction:column;gap:5px;margin-bottom:18px}
-.product-include{font-size:12px;color:var(--muted);display:flex;gap:6px}
-.product-include span:first-child{color:var(--green)}
-.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.product-price{font-family:var(--ff-h);font-size:1.3rem;font-weight:800}
-.product-price-sub{font-size:11px;color:var(--muted);margin-top:1px}
-.product-price-old{font-size:12px;color:var(--muted);text-decoration:line-through;margin-right:4px}
-
-/* ── PAQUETE DESTACADO ───────────────────────────────────────── */
-.bundle-card{
-  margin-top:24px;
-  background:linear-gradient(135deg,rgba(245,158,11,.07),rgba(37,99,235,.07));
-  border:1px solid rgba(245,158,11,.3);border-radius:16px;padding:36px;
-  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
-@media(max-width:640px){.bundle-card{grid-template-columns:1fr}}
-.bundle-tag{display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;color:var(--gold);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
-.bundle-tag::before{content:'★';font-size:10px}
-.bundle-card h3{font-size:1.4rem;margin-bottom:10px}
-.bundle-card p{font-size:14px;color:var(--muted);line-height:1.6;max-width:480px;margin-bottom:16px}
-.bundle-items{display:flex;gap:8px;flex-wrap:wrap}
-.bundle-item{font-size:12px;background:rgba(255,255,255,.06);
-  border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--muted)}
-.bundle-price-wrap{text-align:center;min-width:160px}
-.bundle-price{font-family:var(--ff-h);font-size:2.2rem;font-weight:800;color:var(--gold)}
-.bundle-price-before{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:4px}
-.bundle-price-save{font-size:12px;color:var(--green);margin-top:6px}
-
-/* ── CÓMO FUNCIONA ───────────────────────────────────────────── */
-.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden;margin-top:52px}
-.how-step{background:var(--bg);padding:32px 24px}
-.how-n{font-family:var(--ff-h);font-size:2.8rem;font-weight:800;
-  color:rgba(37,99,235,.14);line-height:1;margin-bottom:14px}
-.how-step h3{margin-bottom:8px;font-size:1.05rem}
-.how-step p{font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ── PARA QUIÉN ──────────────────────────────────────────────── */
-.audience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:48px}
-.audience-card{background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px}
-.audience-icon{width:40px;height:40px;border-radius:10px;
-  background:rgba(37,99,235,.12);display:flex;align-items:center;
-  justify-content:center;font-size:18px;margin-bottom:14px}
-.audience-card h3{font-size:1rem;margin-bottom:6px}
-.audience-card p{font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ── PLATAFORMA PREVIEW (futura) ─────────────────────────────── */
-.platform-preview{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:20px;overflow:hidden;margin-top:52px}
-.platform-bar{
-  background:var(--bg3);border-bottom:1px solid var(--border);
-  padding:12px 20px;display:flex;align-items:center;gap:8px}
-.platform-dot{width:10px;height:10px;border-radius:50%}
-.platform-url{background:var(--bg);border-radius:6px;padding:4px 16px;
-  font-size:12px;color:var(--muted);margin-left:12px}
-.platform-coming{
-  padding:48px 36px;display:flex;gap:36px;align-items:center;flex-wrap:wrap}
-.platform-coming-left{flex:1;min-width:260px}
-.platform-coming-left h3{font-size:1.4rem;margin-bottom:10px}
-.platform-coming-left p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px}
-.platform-modules{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:280px}
-.pmod{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px}
-.pmod-name{font-size:13px;font-weight:500;margin-bottom:3px}
-.pmod-desc{font-size:11px;color:var(--muted)}
-.coming-badge{display:inline-block;font-size:10px;background:rgba(37,99,235,.15);
-  color:var(--accent2);border-radius:99px;padding:2px 8px;margin-bottom:6px}
-
-/* ── WAITLIST ────────────────────────────────────────────────── */
-.waitlist-box{
-  background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(245,158,11,.06));
-  border:1px solid rgba(37,99,235,.25);border-radius:20px;
-  padding:56px 48px;text-align:center}
-.waitlist-box h2{margin-bottom:12px}
-.waitlist-box p{color:var(--muted);max-width:480px;margin:0 auto 32px;font-size:1rem}
-.waitlist-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.waitlist-input{
-  flex:1;min-width:220px;padding:13px 18px;border-radius:var(--r);
-  background:var(--bg3);border:1px solid var(--border);
-  color:var(--text);font-family:var(--ff-b);font-size:14px;outline:none}
-.waitlist-input:focus{border-color:var(--accent2)}
-.waitlist-input::placeholder{color:var(--muted)}
-.waitlist-perks{display:flex;gap:24px;justify-content:center;margin-top:24px;flex-wrap:wrap}
-.waitlist-perk{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.waitlist-perk::before{content:'✓';color:var(--green)}
-
-/* ── TESTIMONIOS ─────────────────────────────────────────────── */
-.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:48px}
-.testi-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px}
-.testi-stars{color:var(--gold);font-size:13px;margin-bottom:14px}
-.testi-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px;font-style:italic}
-.testi-author{display:flex;align-items:center;gap:10px}
-.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--bg3);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--ff-h);font-weight:700;font-size:13px;color:var(--accent2)}
-.testi-name{font-size:13px;font-weight:500}
-.testi-role{font-size:11px;color:var(--muted)}
-
-/* ── FAQ ─────────────────────────────────────────────────────── */
-.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:3px;max-width:720px;margin-inline:auto}
-.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--ff-b);
-  font-size:14px;font-weight:500;padding:18px 22px;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;text-align:left;gap:12px}
-.faq-q:hover{color:var(--accent2)}
-.faq-chevron{transition:transform .25s;font-size:11px;color:var(--muted);flex-shrink:0}
-.faq-item.open .faq-chevron{transform:rotate(180deg)}
-.faq-a{display:none;padding:4px 22px 18px;font-size:13px;color:var(--muted);line-height:1.7;
-  border-top:1px solid var(--border);padding-top:14px}
-.faq-item.open .faq-a{display:block}
-
-/* ── FOOTER ──────────────────────────────────────────────────── */
-footer{border-top:1px solid var(--border);padding:52px 0 28px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
-.footer-brand p{font-size:13px;color:var(--muted);margin-top:10px;max-width:220px;line-height:1.6}
-.footer-col h4{font-size:12px;font-weight:600;margin-bottom:14px;color:var(--text)}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.footer-col a{font-size:13px;color:var(--muted);transition:color .2s}
-.footer-col a:hover{color:var(--text)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:10px;border-top:1px solid var(--border);padding-top:22px}
-.footer-bottom p{font-size:12px;color:var(--muted)}
-.footer-tag{font-size:11px;background:rgba(16,185,129,.1);color:var(--green);
-  border-radius:99px;padding:2px 10px}
-</style>
 </head>
 <body>
-
-<!-- ═══ NAV ═══ -->
-<nav id="nav">
-  <div class="container nav-inner">
-    <div class="nav-logo">Pyme<span>X</span></div>
-    <ul class="nav-links">
-      <li><a href="#tienda">Plantillas</a></li>
-      <li><a href="#como-funciona">Cómo funciona</a></li>
-      <li><a href="#plataforma">Plataforma</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <div class="nav-cta">
-      <span class="nav-badge">Fase 1 — Plantillas</span>
-      <a href="#waitlist" class="btn btn-primary" style="padding:10px 20px;font-size:14px">Lista de espera</a>
+<div class="page">
+  <div id="site-nav"></div>
+  
+<section class="hero">
+  <div class="container hero-wrap">
+    <div class="hero-copy">
+      <div class="kicker">Analixia Pyme</div>
+      <div class="small-label" style="margin-top:16px">Plantillas empresariales</div>
+      <h1>Tus números,<br><span class="blue">claros.</span></h1>
+      <p>Plantillas Excel con diseño serio, estructura profesional y foco real en PyMEs. Para ver mejor tu negocio, ordenar tus datos y tomar decisiones con más criterio.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="tienda.html">Ver plantillas</a>
+        <a class="btn btn-secondary" href="nosotros.html">Quiénes somos</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>9</strong><span class="muted">plantillas actuales</span></div>
+        <div class="stat"><strong>Dark</strong><span class="muted">diseño serio y elegante</span></div>
+        <div class="stat"><strong>Chile</strong><span class="muted">enfoque PyME local</span></div>
+      </div>
     </div>
-  </div>
-</nav>
 
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
-  <div class="container">
-    <div style="max-width:780px">
-      <div class="hero-eyebrow fade-up">
-        <div class="pulse"></div>
-        Herramientas financieras para PyMEs chilenas
-      </div>
-      <h1 class="fade-up d1">
-        Toma decisiones<br>con <em>datos reales</em>,<br>no con intuición
-      </h1>
-      <p class="hero-sub fade-up d2">
-        Plantillas Excel profesionales de análisis financiero — balance general, flujo de caja, estado de resultados y más — diseñadas para dueños de negocio que quieren entender sus números sin necesitar un contador.
-      </p>
-      <div class="hero-btns fade-up d3">
-        <a href="#tienda" class="btn btn-primary">Ver plantillas →</a>
-        <a href="#plataforma" class="btn btn-outline">Ver plataforma futura</a>
-      </div>
-      <div class="hero-stats fade-up">
-        <div><div class="stat-n accent">6+</div><div class="stat-l">Plantillas disponibles</div></div>
-        <div><div class="stat-n" style="color:var(--gold)">15+</div><div class="stat-l">Indicadores por plantilla</div></div>
-        <div><div class="stat-n" style="color:var(--green)">100%</div><div class="stat-l">Listas para usar</div></div>
+    <div class="hero-visual">
+      <div class="glow blue"></div>
+      <div class="glow gold"></div>
+      <div class="hero-shell">
+        <div class="hero-dash">
+          <div class="kpi">
+            <div class="label">Ventas</div>
+            <div class="value">CLP 3.8M</div>
+            <div class="hint">último período</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Caja</div>
+            <div class="value" style="color:var(--gold)">CLP 920k</div>
+            <div class="hint">saldo disponible</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Margen</div>
+            <div class="value" style="color:var(--teal)">29.4%</div>
+            <div class="hint">resultado estimado</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Stock crítico</div>
+            <div class="value" style="color:var(--red)">3 productos</div>
+            <div class="hint">reposición sugerida</div>
+          </div>
+          <div class="mini-panel">
+            <div class="chart-legend">
+              <span><span class="legend-dot" style="background:var(--blue)"></span>Ingresos</span>
+              <span><span class="legend-dot" style="background:var(--gold)"></span>Gastos</span>
+              <span><span class="legend-dot" style="background:var(--teal)"></span>Resultado</span>
+            </div>
+            <div class="bars">
+              <div class="bar" style="height:30%"></div>
+              <div class="bar" style="height:52%"></div>
+              <div class="bar" style="height:46%"></div>
+              <div class="bar" style="height:78%"></div>
+              <div class="bar" style="height:58%"></div>
+              <div class="bar" style="height:84%"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ROADMAP BANNER ═══ -->
-<div class="section" style="padding-top:0;padding-bottom:40px">
+<section class="section">
   <div class="container">
-    <div class="phase-banner fade-up">
-      <div class="phase-banner-left">
-        <h3>Estamos en Fase 1 — y eso es una ventaja para ti</h3>
-        <p>Comprando hoy accedes a precios de lanzamiento y entras automáticamente a la lista de espera de la plataforma completa con análisis por IA, comunidad de socios y cursos con certificación.</p>
-        <div class="phase-steps" style="margin-top:14px">
-          <div class="phase-step">
-            <div class="phase-dot" style="background:var(--gold)"></div>
-            <span style="color:var(--gold);font-weight:500">Fase 1 — Plantillas Excel</span>
-          </div>
-          <span class="phase-sep">→</span>
-          <div class="phase-step">
-            <div class="phase-dot" style="background:var(--muted)"></div>
-            <span class="muted">Fase 2 — Análisis IA</span>
-          </div>
-          <span class="phase-sep">→</span>
-          <div class="phase-step">
-            <div class="phase-dot" style="background:var(--muted)"></div>
-            <span class="muted">Fase 3 — Comunidad Premium</span>
-          </div>
-        </div>
-      </div>
-      <a href="#tienda" class="btn btn-gold">Ver plantillas →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ TIENDA ═══ -->
-<section id="tienda" class="section" style="padding-top:20px;background:var(--bg2)">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="label">Tienda</div>
-      <h2>Plantillas financieras profesionales</h2>
-      <p class="muted" style="margin-top:10px;max-width:520px">Cada plantilla viene con fórmulas automáticas, instrucciones dentro del archivo y un video de uso. Descarga, llena tus datos y empieza a entender tu negocio.</p>
-    </div>
-
-    <div class="store-grid">
-
-      <!-- PRODUCTO 1 -->
-      <div class="product-card fade-up">
-        <div class="product-preview">
-          <div class="product-preview-inner">
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Ingresos</span><div class="pp-bar" style="background:linear-gradient(90deg,#10B981,#10B98188);width:75%"></div><span class="pp-val" style="color:#10B981">$1.25M</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Costos</span><div class="pp-bar" style="background:linear-gradient(90deg,#EF4444,#EF444488);width:60%"></div><span class="pp-val" style="color:#EF4444">$980k</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Margen</span><div class="pp-bar" style="background:linear-gradient(90deg,#3B82F6,#3B82F688);width:30%"></div><span class="pp-val" style="color:#3B82F6">30%</span></div>
-          </div>
-          <div class="product-badge badge-hot">Más vendido</div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Análisis de resultados</div>
-          <div class="product-name">Estado de Resultados Profesional</div>
-          <div class="product-desc">Calcula automáticamente ingresos, costos, margen bruto, margen neto y utilidad. 3 períodos simultáneos con variación mes a mes.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>3 períodos comparativos</span></div>
-            <div class="product-include"><span>✓</span><span>Margen bruto y neto automático</span></div>
-            <div class="product-include"><span>✓</span><span>Semáforo de salud financiera</span></div>
-            <div class="product-include"><span>✓</span><span>Instrucciones dentro del archivo</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price accent">$9.990</div>
-              <div class="product-price-sub">Pago único · descarga inmediata</div>
-            </div>
-            <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTO 2 -->
-      <div class="product-card fade-up d1">
-        <div class="product-preview">
-          <div class="product-preview-inner">
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Entradas</span><div class="pp-bar" style="background:linear-gradient(90deg,#10B981,#10B98188);width:80%"></div><span class="pp-val" style="color:#10B981">$850k</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Salidas</span><div class="pp-bar" style="background:linear-gradient(90deg,#EF4444,#EF444488);width:55%"></div><span class="pp-val" style="color:#EF4444">$680k</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Saldo final</span><div class="pp-bar" style="background:linear-gradient(90deg,#F59E0B,#F59E0B88);width:25%"></div><span class="pp-val" style="color:#F59E0B">$170k</span></div>
-          </div>
-          <div class="product-badge badge-new">Nuevo</div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Liquidez</div>
-          <div class="product-name">Flujo de Caja — Método Directo</div>
-          <div class="product-desc">Controla exactamente cuánto dinero entra y sale cada mes. Detecta cuándo vas a necesitar caja antes de que sea un problema.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>Entradas y salidas detalladas</span></div>
-            <div class="product-include"><span>✓</span><span>Saldo proyectado automático</span></div>
-            <div class="product-include"><span>✓</span><span>Alerta de caja mínima</span></div>
-            <div class="product-include"><span>✓</span><span>Proyección a 3 meses</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price accent">$9.990</div>
-              <div class="product-price-sub">Pago único · descarga inmediata</div>
-            </div>
-            <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTO 3 -->
-      <div class="product-card fade-up d2">
-        <div class="product-preview">
-          <div class="product-preview-inner">
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Activos</span><div class="pp-bar" style="background:linear-gradient(90deg,#10B981,#10B98188);width:85%"></div><span class="pp-val" style="color:#10B981">$2.1M</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Pasivos</span><div class="pp-bar" style="background:linear-gradient(90deg,#EF4444,#EF444488);width:45%"></div><span class="pp-val" style="color:#EF4444">$920k</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Patrimonio</span><div class="pp-bar" style="background:linear-gradient(90deg,#3B82F6,#3B82F688);width:60%"></div><span class="pp-val" style="color:#3B82F6">$1.18M</span></div>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Posición financiera</div>
-          <div class="product-name">Balance General Completo</div>
-          <div class="product-desc">Fotografia completa de tu negocio: activos, pasivos y patrimonio. Calcula prueba ácida y razón corriente automáticamente.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>Activos corrientes y no corrientes</span></div>
-            <div class="product-include"><span>✓</span><span>Prueba ácida y razón corriente</span></div>
-            <div class="product-include"><span>✓</span><span>Patrimonio neto automático</span></div>
-            <div class="product-include"><span>✓</span><span>Comparativa 2 períodos</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price accent">$9.990</div>
-              <div class="product-price-sub">Pago único · descarga inmediata</div>
-            </div>
-            <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTO 4 -->
-      <div class="product-card fade-up">
-        <div class="product-preview" style="background:linear-gradient(135deg,#0A0E17,#1C2433)">
-          <div class="product-preview-inner">
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">VAN</span><div class="pp-bar" style="background:linear-gradient(90deg,#10B981,#10B98155);width:70%"></div><span class="pp-val" style="color:#10B981">$340k</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">TIR</span><div class="pp-bar" style="background:linear-gradient(90deg,#F59E0B,#F59E0B55);width:55%"></div><span class="pp-val" style="color:#F59E0B">18.4%</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Payback</span><div class="pp-bar" style="background:linear-gradient(90deg,#3B82F6,#3B82F655);width:40%"></div><span class="pp-val" style="color:#3B82F6">2.1 años</span></div>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Evaluación de proyectos</div>
-          <div class="product-name">Evaluador VAN, TIR y Payback</div>
-          <div class="product-desc">¿Vale la pena hacer esa inversión? Calcula el VAN, TIR y período de recuperación de cualquier proyecto o decisión de inversión.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>VAN con tasa de descuento editable</span></div>
-            <div class="product-include"><span>✓</span><span>TIR calculado automáticamente</span></div>
-            <div class="product-include"><span>✓</span><span>Período de payback simple y descontado</span></div>
-            <div class="product-include"><span>✓</span><span>Análisis de sensibilidad básico</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price accent">$12.990</div>
-              <div class="product-price-sub">Pago único · descarga inmediata</div>
-            </div>
-            <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTO 5 -->
-      <div class="product-card fade-up d1">
-        <div class="product-preview">
-          <div class="product-preview-inner">
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Ventas</span><div class="pp-bar" style="background:linear-gradient(90deg,#10B981,#10B98155);width:90%"></div><span class="pp-val" style="color:#10B981">Mes 6</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Costos</span><div class="pp-bar" style="background:linear-gradient(90deg,#EF4444,#EF444455);width:65%"></div><span class="pp-val" style="color:#EF4444">Mes 6</span></div>
-            <div class="pp-row"><span class="pp-label" style="font-size:9px;color:var(--muted)">Utilidad</span><div class="pp-bar" style="background:linear-gradient(90deg,#3B82F6,#3B82F655);width:45%"></div><span class="pp-val" style="color:#3B82F6">Proy.</span></div>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Planificación</div>
-          <div class="product-name">Proyección Financiera 12 Meses</div>
-          <div class="product-desc">Proyecta ingresos, costos y utilidad para los próximos 12 meses. Define supuestos de crecimiento y el modelo calcula automáticamente.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>12 meses proyectados</span></div>
-            <div class="product-include"><span>✓</span><span>Supuestos de crecimiento editables</span></div>
-            <div class="product-include"><span>✓</span><span>3 escenarios: pesimista / base / optimista</span></div>
-            <div class="product-include"><span>✓</span><span>Gráficos automáticos</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price accent">$12.990</div>
-              <div class="product-price-sub">Pago único · descarga inmediata</div>
-            </div>
-            <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTO 6 — GRATIS -->
-      <div class="product-card fade-up d2">
-        <div class="product-preview" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(37,99,235,.1))">
-          <div class="product-preview-inner">
-            <div style="text-align:center;padding:8px 0">
-              <div style="font-family:var(--ff-h);font-size:1.3rem;font-weight:800;color:var(--green)">GRATIS</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:4px">Template de registro mensual</div>
-            </div>
-          </div>
-          <div class="product-badge badge-free">Gratis</div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Para empezar</div>
-          <div class="product-name">Template de Registro Financiero Mensual</div>
-          <div class="product-desc">El punto de partida. Registra ingresos y gastos del mes con categorías predefinidas. El archivo que alimenta todas las demás plantillas.</div>
-          <div class="product-includes">
-            <div class="product-include"><span>✓</span><span>Registro de ingresos y gastos</span></div>
-            <div class="product-include"><span>✓</span><span>Categorías con menú desplegable</span></div>
-            <div class="product-include"><span>✓</span><span>Instrucciones incluidas</span></div>
-            <div class="product-include"><span>✓</span><span>Compatible con todas las plantillas</span></div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price" style="color:var(--green)">Gratis</div>
-              <div class="product-price-sub">Solo deja tu email</div>
-            </div>
-            <a href="#waitlist" class="btn btn-ghost">Descargar</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PAQUETE COMPLETO -->
-    <div class="bundle-card fade-up">
+    <div class="section-head">
       <div>
-        <div class="bundle-tag">Paquete completo</div>
-        <h3>Kit Financiero PymeX — Todo en uno</h3>
-        <p>Las 5 plantillas pagas en un solo paquete. Cubre todo lo que necesitas para analizar, proyectar y tomar decisiones en tu negocio. Actualizaciones gratuitas incluidas.</p>
-        <div class="bundle-items">
-          <span class="bundle-item">Estado de Resultados</span>
-          <span class="bundle-item">Flujo de Caja</span>
-          <span class="bundle-item">Balance General</span>
-          <span class="bundle-item">VAN · TIR · Payback</span>
-          <span class="bundle-item">Proyección 12 meses</span>
-        </div>
+        <div class="small-label">Plantillas destacadas</div>
+        <h2>Ordena, mira y decide mejor</h2>
       </div>
-      <div class="bundle-price-wrap">
-        <div class="bundle-price-before">$54.950 por separado</div>
-        <div class="bundle-price">$34.990</div>
-        <a href="#" class="btn btn-gold" style="margin-top:14px;width:100%;justify-content:center">Comprar paquete</a>
-        <div class="bundle-price-save">Ahorras $19.960 (36%)</div>
-      </div>
+      <a class="btn btn-secondary" href="tienda.html">Ver catálogo completo</a>
     </div>
-
+    <div id="featured-products" class="product-grid"></div>
   </div>
 </section>
 
-<!-- ═══ CÓMO FUNCIONA ═══ -->
-<section id="como-funciona" class="section">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="label">Proceso</div>
-      <h2>De tus datos a tus decisiones en 3 pasos</h2>
-    </div>
-    <div class="how-grid fade-up">
-      <div class="how-step">
-        <div class="how-n">01</div>
-        <h3>Descarga la plantilla</h3>
-        <p>Elige la que necesitas, paga (o descarga la gratis), y la tienes en tu computador lista para usar. No hay instalaciones ni registros.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-n">02</div>
-        <h3>Ingresa tus datos</h3>
-        <p>Solo llenas las celdas amarillas. Las azules son fórmulas que calculan todo automáticamente. Las instrucciones están dentro del mismo archivo.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-n">03</div>
-        <h3>Lee tus resultados</h3>
-        <p>Los indicadores aparecen calculados al instante. Semáforos de colores te dicen qué está bien, qué está en alerta y qué requiere acción inmediata.</p>
-      </div>
-      <div class="how-step" style="background:var(--bg2)">
-        <div class="how-n" style="color:rgba(245,158,11,.2)">+</div>
-        <h3 class="gold">Próximamente</h3>
-        <p class="muted">Sube el mismo archivo a la plataforma PymeX y recibe un diagnóstico con IA que te explica qué significan los números y qué hacer al respecto.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PARA QUIÉN ═══ -->
-<section class="section" style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="label">Para quién es</div>
-      <h2>Hecho para dueños de negocio, no para contadores</h2>
-      <p class="muted" style="margin-top:10px;max-width:520px">No necesitas saber de finanzas. Si sabes cuánto vendiste y cuánto gastaste, puedes usar PymeX.</p>
-    </div>
-    <div class="audience-grid fade-up">
-      <div class="audience-card">
-        <div class="audience-icon">🛍️</div>
-        <h3>Comercio y retail</h3>
-        <p>Tiendas, locales, e-commerce. Controla márgenes por producto y detecta cuándo el inventario se come tus ganancias.</p>
-      </div>
-      <div class="audience-card">
-        <div class="audience-icon">🍽️</div>
-        <h3>Gastronomía</h3>
-        <p>Restaurantes, cafeterías, delivery. Entiende tu costo de alimentos, tu ticket promedio y cuándo estás realmente ganando.</p>
-      </div>
-      <div class="audience-card">
-        <div class="audience-icon">🏗️</div>
-        <h3>Servicios y consultoría</h3>
-        <p>Proyectos, honorarios, contratos. Calcula la rentabilidad de cada proyecto y proyecta tu flujo de ingresos.</p>
-      </div>
-      <div class="audience-card">
-        <div class="audience-icon">🏭</div>
-        <h3>Manufactura y producción</h3>
-        <p>Costos de producción, materias primas, mano de obra. Encuentra el precio mínimo rentable para cada producto.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PLATAFORMA FUTURA ═══ -->
-<section id="plataforma" class="section">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="label">Lo que viene</div>
-      <h2>La plataforma completa — en construcción</h2>
-      <p class="muted" style="margin-top:10px;max-width:560px">Sube tu Excel y en menos de 2 minutos recibes un diagnóstico con inteligencia artificial: qué está pasando, qué está fallando, y exactamente qué hacer. Todo dentro de esta misma página.</p>
-    </div>
-    <div class="platform-preview fade-up">
-      <div class="platform-bar">
-        <div class="platform-dot" style="background:#EF4444"></div>
-        <div class="platform-dot" style="background:#F59E0B"></div>
-        <div class="platform-dot" style="background:#10B981"></div>
-        <div class="platform-url">app.pymex.cl/dashboard</div>
-      </div>
-      <div class="platform-coming">
-        <div class="platform-coming-left">
-          <span class="coming-badge">En desarrollo</span>
-          <h3>Tu analista financiero inteligente</h3>
-          <p>Sube el mismo Excel que ya usas, y la plataforma lo analiza con más de 15 reglas de diagnóstico financiero + inteligencia artificial. Sin jerga, sin esperar semanas.</p>
-          <a href="#waitlist" class="btn btn-primary">Entrar a la lista de espera →</a>
-        </div>
-        <div class="platform-modules">
-          <div class="pmod">
-            <span class="coming-badge">Fase 2</span>
-            <div class="pmod-name">Análisis IA</div>
-            <div class="pmod-desc">Sube tu Excel, recibe diagnóstico automático con recomendaciones</div>
-          </div>
-          <div class="pmod">
-            <span class="coming-badge">Fase 3</span>
-            <div class="pmod-name">Comunidad</div>
-            <div class="pmod-desc">Foro privado de socios PyME, casos reales, networking</div>
-          </div>
-          <div class="pmod">
-            <span class="coming-badge">Fase 3</span>
-            <div class="pmod-name">Cursos</div>
-            <div class="pmod-desc">Finanzas, Excel, Python e IA para negocios con certificación</div>
-          </div>
-          <div class="pmod">
-            <span class="coming-badge">Fase 3</span>
-            <div class="pmod-name">Ingenieros</div>
-            <div class="pmod-desc">Atención directa de ingenieros socios para Plan Premium</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ WAITLIST ═══ -->
-<section id="waitlist" class="section" style="background:var(--bg2)">
-  <div class="container">
-    <div class="waitlist-box fade-up">
-      <div class="label" style="justify-content:center">Lista de espera</div>
-      <h2>Entra antes que todos</h2>
-      <p>Sé el primero en acceder a la plataforma cuando se lance. Los que estén en la lista de espera tendrán precio especial de fundadores y cupos garantizados en el Plan Premium.</p>
-      <div class="waitlist-form">
-        <input class="waitlist-input" type="email" placeholder="tu@email.com">
-        <button class="btn btn-primary" onclick="joinWaitlist()">Anotarme →</button>
-      </div>
-      <div id="waitlist-success" style="display:none;margin-top:16px;font-size:14px;color:var(--green)">
-        ✓ Anotado. Te avisamos cuando la plataforma esté lista.
-      </div>
-      <div class="waitlist-perks">
-        <span class="waitlist-perk">Precio de fundador</span>
-        <span class="waitlist-perk">Cupo garantizado Premium</span>
-        <span class="waitlist-perk">Sin spam</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TESTIMONIOS ═══ -->
 <section class="section">
   <div class="container">
-    <div class="section-header fade-up" style="text-align:center;max-width:100%">
-      <div class="label" style="justify-content:center">Testimonios</div>
-      <h2>Lo que dicen quienes ya usan las plantillas</h2>
-    </div>
-    <div class="testi-grid fade-up">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Descargué el flujo de caja y en una tarde entendí por qué siempre me faltaba plata a fin de mes aunque las ventas iban bien. Tenía los cobros muy concentrados en una sola semana."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">MF</div>
-          <div><div class="testi-name">Marcela Fuentes</div><div class="testi-role">Tienda de ropa · Temuco</div></div>
+    <div class="band">
+      <div class="small-label">Por qué elegirnos</div>
+      <div class="why-grid">
+        <div class="card reason">
+          <div class="reason-icon">📈</div>
+          <h3>Diseño con criterio</h3>
+          <p>No buscamos solo que el Excel funcione. Buscamos que se vea serio, vendible y útil para una PyME real.</p>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"El evaluador de VAN y TIR me ayudó a decidir si abría una segunda sucursal. Sin la plantilla hubiera tomado esa decisión solo con el estómago. Los números decían otra cosa."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">RP</div>
-          <div><div class="testi-name">Roberto Pizarro</div><div class="testi-role">Restaurant · Concepción</div></div>
+        <div class="card reason">
+          <div class="reason-icon">🧠</div>
+          <h3>Más análisis, menos adorno</h3>
+          <p>La lógica de fondo importa: estructura, lectura y utilidad real del archivo, no solo colores bonitos.</p>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Compré el paquete completo. Lo que más me sorprendió fue ver cuánto me estaba comiendo el arriendo como porcentaje de mis ingresos. Nunca lo había visto así de claro."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AC</div>
-          <div><div class="testi-name">Andrea Contreras</div><div class="testi-role">Consultora RRHH · Santiago</div></div>
+        <div class="card reason">
+          <div class="reason-icon">🏢</div>
+          <h3>Enfoque empresarial</h3>
+          <p>Colores sobrios, jerarquía visual y una estética más ejecutiva, no estilo curso escolar ni plantilla genérica.</p>
+        </div>
+        <div class="card reason">
+          <div class="reason-icon">🔁</div>
+          <h3>Escalable</h3>
+          <p>La misma web puede crecer después con pagos, lista de espera real, opiniones y una futura plataforma más completa.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FAQ ═══ -->
-<section id="faq" class="section" style="background:var(--bg2)">
+<section class="section" style="padding-top:0">
   <div class="container">
-    <div class="section-header fade-up" style="text-align:center;max-width:100%">
-      <div class="label" style="justify-content:center">Preguntas frecuentes</div>
-      <h2>Todo lo que necesitas saber</h2>
+    <div class="section-head">
+      <div>
+        <div class="small-label">Cómo funciona</div>
+        <h2>Un camino simple</h2>
+      </div>
     </div>
-    <div class="faq-list fade-up">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Necesito saber Excel para usar las plantillas? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">No necesitas saber Excel avanzado. Las plantillas están diseñadas para que solo llenes las celdas marcadas en amarillo. Las fórmulas, cálculos y gráficos funcionan solos. Si sabes abrir un archivo Excel e ingresar números, puedes usarlas.</div>
+    <div class="steps">
+      <div class="card step">
+        <div class="step-num">01</div>
+        <h3>Entras a la tienda</h3>
+        <p>Ves las plantillas disponibles, sus nombres, precios y una vista real del archivo por dentro.</p>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿En qué versión de Excel funcionan? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">Funcionan en Excel 2016 o superior, y también en Google Sheets. Si tienes Office 365, son completamente compatibles. Las fórmulas utilizadas son estándar y no dependen de funciones experimentales.</div>
+      <div class="card step">
+        <div class="step-num">02</div>
+        <h3>Abres el detalle</h3>
+        <p>En cada producto puedes ver imágenes del Excel, leer qué incluye y entender si te sirve antes de comprar.</p>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo pedir una plantilla personalizada para mi rubro? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">Sí. Ofrecemos un servicio de personalización donde adaptamos cualquier plantilla a tu negocio específico: categorías de tu rubro, indicadores relevantes para tu industria, y el formato que necesites. Escríbenos a contacto@pymex.cl para cotizar.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Qué diferencia hay entre las plantillas y la plataforma que viene? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">Las plantillas son archivos Excel que te descargas y usas en tu computador — tú calculas e interpretas los resultados. La plataforma (en desarrollo) recibirá ese mismo archivo y generará automáticamente un diagnóstico con inteligencia artificial que te explicará qué significan los números y qué hacer. Las plantillas son el paso 1, la plataforma es el paso 2.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Si compro ahora, ¿tengo ventajas cuando salga la plataforma? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">Sí. Todos los compradores de plantillas entran automáticamente a la lista de espera con precio de fundador — que será significativamente menor al precio regular — y acceso prioritario al Plan Premium con cupos limitados.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Cómo se hace el pago? <span class="faq-chevron">▼</span></button>
-        <div class="faq-a">Aceptamos tarjetas de crédito y débito a través de Stripe (seguro, sin que guardemos tus datos bancarios). Para clientes en Chile también aceptamos transferencia bancaria. Recibes el archivo de descarga inmediatamente después del pago.</div>
+      <div class="card step">
+        <div class="step-num">03</div>
+        <h3>Compras y usas</h3>
+        <p>Más adelante el sitio puede conectarse a pago real, envío automático y reseñas de clientes. La base ya queda lista.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CTA FINAL ═══ -->
-<section class="section">
-  <div class="container" style="text-align:center">
-    <div class="label" style="justify-content:center;margin-bottom:16px">Empieza hoy</div>
-    <h2 class="fade-up" style="max-width:600px;margin:0 auto 16px">Empieza con la plantilla gratis.<br>Decide después.</h2>
-    <p class="muted fade-up" style="max-width:440px;margin:0 auto 32px">Sin riesgo. Descarga el template de registro mensual gratis, úsalo, y si te sirve sabes que el resto del kit vale la pena.</p>
-    <div class="fade-up" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="#tienda" class="btn btn-primary">Ver todas las plantillas →</a>
-      <a href="#waitlist" class="btn btn-outline">Lista de espera plataforma</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
+<section class="section" style="padding-top:0">
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo">Pyme<span>X</span></div>
-        <p>Herramientas financieras profesionales para pequeñas y medianas empresas de Chile.</p>
-        <p style="margin-top:8px;font-size:12px">contacto@pymex.cl</p>
+    <div class="card" style="padding:32px">
+      <div class="waitlist">
+        <div>
+          <div class="small-label">Lista de espera</div>
+          <h2>Déjanos tu correo</h2>
+          <p>Por ahora el formulario está listo visualmente. Después lo conectas a una base de datos y a un correo automático con Supabase + Resend o con Formspree.</p>
+        </div>
+        <div>
+          <form id="waitlist-form" class="stack">
+            <input type="email" placeholder="tu@email.com" required>
+            <button class="btn btn-primary" type="submit">Quiero enterarme</button>
+          </form>
+          <small id="waitlist-ok" style="display:none"></small>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Tienda</h4>
-        <ul>
-          <li><a href="#tienda">Estado de Resultados</a></li>
-          <li><a href="#tienda">Flujo de Caja</a></li>
-          <li><a href="#tienda">Balance General</a></li>
-          <li><a href="#tienda">VAN y TIR</a></li>
-          <li><a href="#tienda">Paquete completo</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Empresa</h4>
-        <ul>
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#plataforma">Plataforma futura</a></li>
-          <li><a href="#waitlist">Lista de espera</a></li>
-          <li><a href="#">Quiénes somos</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Términos de uso</a></li>
-          <li><a href="#">Privacidad</a></li>
-          <li><a href="#">Política de reembolso</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 PymeX · Hecho en Chile 🇨🇱</p>
-      <span class="footer-tag">Fase 1 — Plantillas Excel</span>
     </div>
   </div>
-</footer>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div id="bundle-home"></div>
+  </div>
+</section>
 
 <script>
-// Nav scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-}, {passive:true});
+document.addEventListener('DOMContentLoaded', function(){
+  renderCatalog('featured-products', 3);
+  renderBundle('bundle-home');
+  setupWaitlist('waitlist-form', 'waitlist-ok');
+});
+</script>
 
-// Fade up observer
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, {threshold: 0.1});
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-// FAQ toggle
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
-
-// Waitlist
-function joinWaitlist() {
-  const input = document.querySelector('.waitlist-input');
-  if (!input.value || !input.value.includes('@')) {
-    input.style.borderColor = '#EF4444';
-    setTimeout(() => input.style.borderColor = '', 1500);
-    return;
-  }
-  input.style.display = 'none';
-  document.querySelector('.waitlist-form .btn-primary').style.display = 'none';
-  document.getElementById('waitlist-success').style.display = 'block';
-}
+  <div id="site-footer"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  renderNav('inicio');
+  renderFooter();
+});
 </script>
 </body>
 </html>
