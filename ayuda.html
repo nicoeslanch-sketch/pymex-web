@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Ayuda — Analixia</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script defer src="assets/products.js"></script>
+<script defer src="assets/script.js"></script>
+
+</head>
+<body data-page="ayuda">
+<div data-header></div>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Inicio</a> / Ayuda</div>
+      <span class="eyebrow">Guía de edición</span>
+      <h1>Cómo cambiar imágenes, textos y formularios.</h1>
+      <p>Esta página está pensada para ayudarte a mantener el sitio sin perderte.</p>
+    </div>
+  </section>
+  <section class="section-tight">
+    <div class="container faq">
+      <div class="card faq-item">
+        <h3>1. Cambiar imágenes de las planillas</h3>
+        <p>Guarda tus capturas dentro de <code>assets/productos/nombre-del-producto/</code> y luego reemplaza las rutas en <code>assets/products.js</code>.</p>
+      </div>
+      <div class="card faq-item">
+        <h3>2. Cambiar textos del sitio</h3>
+        <p>Edita los archivos HTML para texto de página y <code>assets/script.js</code> para tarjetas o navegación común.</p>
+      </div>
+      <div class="card faq-item">
+        <h3>3. Conectar lista de espera a base de datos</h3>
+        <p>El formulario hoy guarda en localStorage. La siguiente integración recomendada es Supabase, Airtable o un endpoint propio.</p>
+      </div>
+      <div class="card faq-item">
+        <h3>4. Publicar cambios</h3>
+        <p>Guarda, luego ejecuta <code>git add .</code>, <code>git commit -m "actualización"</code> y <code>git push</code>.</p>
+      </div>
+      <div class="card faq-item">
+        <h3>5. Qué botones llevan a la plataforma futura</h3>
+        <p>Los CTA de “Plataforma IA”, “Lista de espera” y “robot / análisis” apuntan a <code>plataforma.html</code>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<div data-footer></div>
+</body>
+</html>

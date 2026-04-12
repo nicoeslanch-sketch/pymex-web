@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<defs>
+  <linearGradient id="g" x1="0" x2="1">
+    <stop offset="0%" stop-color="#0F1120"/>
+    <stop offset="100%" stop-color="#161929"/>
+  </linearGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#g)"/>
+<rect x="60" y="60" width="1080" height="680" rx="24" fill="#111526" stroke="rgba(255,255,255,0.12)"/>
+<rect x="100" y="110" width="220" height="36" rx="10" fill="#00B4D8" opacity="0.15"/>
+<text x="100" y="135" fill="#00B4D8" font-size="20" font-family="Arial, sans-serif" font-weight="700">Inventario y Stock</text>
+<rect x="100" y="180" width="250" height="120" rx="16" fill="#1E2235"/>
+<rect x="375" y="180" width="250" height="120" rx="16" fill="#1E2235"/>
+<rect x="650" y="180" width="250" height="120" rx="16" fill="#1E2235"/>
+<rect x="925" y="180" width="175" height="420" rx="16" fill="#1E2235"/>
+<rect x="100" y="340" width="790" height="260" rx="20" fill="#12192B" stroke="rgba(255,255,255,0.08)"/>
+<polyline points="130,520 240,450 330,490 430,370 520,410 620,320 760,350 860,260" fill="none" stroke="#00B4D8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="430" cy="370" r="9" fill="#00B4D8"/>
+<circle cx="620" cy="320" r="9" fill="#00B4D8"/>
+<text x="130" y="650" fill="#EEF0FF" font-size="34" font-family="Arial, sans-serif" font-weight="700">Vista 1</text>
+<text x="130" y="690" fill="#7A82A8" font-size="22" font-family="Arial, sans-serif">Reemplaza esta imagen por tu captura real del Excel.</text>
+</svg>
