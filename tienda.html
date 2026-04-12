@@ -1,65 +1,595 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plantillas | Analixia Pyme</title>
+<title>Tienda — Analixia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
-<script src="assets/products.js" defer></script>
-<script src="assets/script.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08090F;--bg2:#0F1120;--bg3:#161929;--bg4:#1E2235;--accent:#4F6EF7;--accent2:#7B93FF;--gold:#F5A623;--gold2:#FFD085;--green:#0ECB81;--red:#F05050;--text:#EEF0FF;--muted:#7A82A8;--border:rgba(255,255,255,0.07);--card:rgba(255,255,255,0.03);--ff-h:'Syne',sans-serif;--ff-b:'DM Sans',sans-serif;--r:14px;--r-sm:8px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-b);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--ff-h);line-height:1.15}
+h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;letter-spacing:-.02em}
+h3{font-size:1.1rem;font-weight:600}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+.accent{color:var(--accent2)}
+.gold{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--r);font-family:var(--ff-b);font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(79,110,247,.35)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent2);color:var(--accent2)}
+.btn-gold{background:var(--gold);color:#08090F;font-weight:700}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-green{background:var(--green);color:#08090F;font-weight:700}
+.btn-green:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn-sm{padding:9px 18px;font-size:13px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
+nav,section,footer,header{position:relative;z-index:1}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fade-up.visible{opacity:1;transform:none}
+.fade-up.d1{transition-delay:.1s}.fade-up.d2{transition-delay:.2s}.fade-up.d3{transition-delay:.3s}
 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .3s;background:rgba(8,9,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:var(--ff-h);font-weight:800;font-size:14px;color:#fff}
+.nav-logo-text{font-family:var(--ff-h);font-size:1.3rem;font-weight:800;letter-spacing:-.03em}
+.nav-logo-text span{color:var(--accent2)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);padding:6px 12px;border-radius:var(--r-sm);transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.06)}
+.nav-cta{display:flex;gap:10px}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* PAGE HEADER */
+.page-header{padding:120px 0 60px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.page-header h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-bottom:10px}
+.page-header p{color:var(--muted);font-size:1rem;max-width:500px}
+
+/* FILTROS */
+.store-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:36px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{font-size:12px;padding:7px 16px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--ff-b)}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.store-count{font-size:13px;color:var(--muted)}
+
+/* GRID */
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:40px}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;cursor:pointer}
+.product-card:hover{border-color:rgba(79,110,247,.35);transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.product-card.featured{border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.03)}
+.product-card.premium{border-color:rgba(79,110,247,.3);background:rgba(79,110,247,.03)}
+.product-card[data-hidden="true"]{display:none}
+
+.product-preview{height:190px;background:var(--bg3);position:relative;overflow:hidden}
+.preview-gallery{display:flex;width:100%;height:100%;transition:transform .35s ease}
+.preview-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:16px;flex-shrink:0}
+.preview-slide img{width:100%;height:100%;object-fit:cover;border-radius:6px;border:1px solid var(--border)}
+.preview-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted)}
+.preview-ph-icon{font-size:32px;opacity:.35}
+.preview-ph-text{font-size:10px;opacity:.45;text-align:center;line-height:1.5}
+
+.gallery-nav{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.gallery-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.gallery-dot.active{background:#fff;width:14px;border-radius:99px}
+.prev-btn,.next-btn{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.prev-btn:hover,.next-btn:hover{background:rgba(0,0,0,.85)}
+.prev-btn{left:8px}.next-btn{right:8px}
+
+.product-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px;z-index:1}
+.badge-hot{background:var(--gold);color:#08090F}
+.badge-new{background:var(--accent);color:#fff}
+.badge-free{background:var(--green);color:#08090F}
+.badge-pack{background:linear-gradient(90deg,var(--accent),var(--gold));color:#fff}
+
+.product-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.product-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.product-name{font-family:var(--ff-h);font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.3}
+.product-desc{font-size:12px;color:var(--muted);line-height:1.65;flex:1;margin-bottom:12px}
+.product-includes{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.product-include{font-size:11px;color:var(--muted);display:flex;gap:6px;align-items:flex-start}
+.product-include span:first-child{color:var(--green);flex-shrink:0}
+.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.product-price{font-family:var(--ff-h);font-size:1.25rem;font-weight:800}
+.product-price-old{font-size:11px;color:var(--muted);text-decoration:line-through;display:block;margin-bottom:1px}
+.product-price-sub{font-size:10px;color:var(--muted);margin-top:1px}
+
+/* BUNDLE */
+.bundle-section{background:linear-gradient(135deg,rgba(245,166,35,.07),rgba(79,110,247,.07));border:1px solid rgba(245,166,35,.25);border-radius:18px;padding:40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-bottom:60px}
+@media(max-width:640px){.bundle-section{grid-template-columns:1fr}}
+.bundle-tag{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.bundle-section h2{font-size:1.5rem;margin-bottom:8px}
+.bundle-section p{font-size:14px;color:var(--muted);line-height:1.6;max-width:480px;margin-bottom:14px}
+.bundle-list{display:flex;flex-wrap:wrap;gap:6px}
+.bundle-list-item{font-size:11px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:3px 10px;color:var(--muted)}
+.bundle-right{text-align:center;min-width:160px}
+.bundle-price{font-family:var(--ff-h);font-size:2rem;font-weight:800;color:var(--gold)}
+.bundle-old-price{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:4px}
+.bundle-save{font-size:11px;color:var(--green);margin-top:6px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;max-width:820px;width:100%;max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border);gap:16px}
+.modal-header-left h3{font-size:1.05rem;margin-bottom:4px}
+.modal-header-left p{font-size:12px;color:var(--muted)}
+.modal-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px;border-radius:6px;flex-shrink:0}
+.modal-close:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.modal-gallery-wrap{position:relative;flex:1;min-height:320px;overflow:hidden}
+.modal-slides{display:flex;height:100%;transition:transform .4s ease}
+.modal-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal-slide img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;border:1px solid var(--border)}
+.modal-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:40px}
+.modal-ph-icon{font-size:56px;opacity:.25}
+.modal-ph-title{font-size:15px;font-weight:500;color:var(--text)}
+.modal-ph-sub{font-size:13px;line-height:1.6;max-width:340px}
+.modal-ph-code{font-family:monospace;font-size:11px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 12px;margin-top:4px;color:var(--accent2)}
+.modal-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.modal-arrow:hover{background:rgba(0,0,0,.9);border-color:var(--accent)}
+.modal-prev{left:12px}.modal-next{right:12px}
+.modal-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-top:1px solid var(--border);flex-wrap:wrap;gap:10px}
+.modal-counter{font-size:12px;color:var(--muted)}
+.modal-footer-btns{display:flex;gap:8px;align-items:center}
+.modal-price-display{font-family:var(--ff-h);font-size:1.1rem;font-weight:800}
+.modal-dots{display:flex;gap:5px;margin-top:8px;justify-content:center}
+.modal-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
+.modal-dot.active{background:var(--accent);width:16px;border-radius:99px}
+
+footer{border-top:1px solid var(--border);padding:48px 0 28px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+.footer-bottom p{font-size:12px;color:var(--muted)}
+</style>
 </head>
 <body>
-<div class="page">
-  <div id="site-nav"></div>
-  
-<section class="page-hero">
-  <div class="container">
-    <div class="breadcrumbs">Inicio / Plantillas</div>
-    <div class="small-label">Tienda</div>
-    <h1>Plantillas para<br><span class="gold">Analixia Pyme</span></h1>
-    <p>Catálogo inicial de productos digitales. Cada plantilla tiene su propia página con imágenes, detalle y estructura preparada para crecer.</p>
-  </div>
-</section>
 
-<section class="section" style="padding-top:34px">
-  <div class="container">
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px">
-      <button class="btn btn-secondary active" data-filter="todos">Todas</button>
-      <button class="btn btn-secondary" data-filter="gestión">Gestión</button>
-      <button class="btn btn-secondary" data-filter="contabilidad">Contabilidad</button>
-      <button class="btn btn-secondary" data-filter="estado">Estados</button>
-      <button class="btn btn-secondary" data-filter="liquidez">Liquidez</button>
-      <button class="btn btn-secondary" data-filter="operación">Operación</button>
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">A</div>
+      <div class="nav-logo-text">Analix<span>ia</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="tienda.html" class="active">Tienda</a></li>
+      <li><a href="plataforma.html">Plataforma</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="index.html#waitlist" class="btn btn-primary btn-sm">Lista de espera</a>
     </div>
-    <div id="catalog-products" class="catalog-grid"></div>
   </div>
-</section>
+</nav>
 
-<section class="section" style="padding-top:0">
+<!-- HEADER -->
+<header class="page-header">
   <div class="container">
-    <div id="bundle-shop"></div>
+    <div class="muted" style="font-size:13px;margin-bottom:10px"><a href="index.html">Inicio</a> → Tienda</div>
+    <h1 class="fade-up">Plantillas financieras<br>para tu PyME</h1>
+    <p class="fade-up d1">Descarga, llena tus datos y entiende tu negocio en minutos. Sin conocimientos de finanzas. Sin complicaciones.</p>
+  </div>
+</header>
+
+<!-- TIENDA -->
+<section style="padding:48px 0 80px">
+  <div class="container">
+
+    <!-- FILTROS -->
+    <div class="store-toolbar fade-up">
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterStore('todas',this)">Todas</button>
+        <button class="filter-btn" onclick="filterStore('gestion',this)">Gestión completa</button>
+        <button class="filter-btn" onclick="filterStore('estados',this)">Estados financieros</button>
+        <button class="filter-btn" onclick="filterStore('liquidez',this)">Liquidez</button>
+        <button class="filter-btn" onclick="filterStore('gestion-especifica',this)">Gestión específica</button>
+        <button class="filter-btn" onclick="filterStore('gratis',this)">Gratis</button>
+      </div>
+      <div class="store-count" id="store-count">7 plantillas disponibles</div>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="store-grid" id="store-grid">
+
+      <!-- P1 — INTEGRAL -->
+      <div class="product-card premium fade-up" data-cat="gestion" onclick="openModal('integral')">
+        <div class="product-preview" id="prev-integral">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph">
+                <div class="preview-ph-icon">📊</div>
+                <div class="preview-ph-text">Planilla Integral de Gestión PyME<br>Agrega tus capturas en img/integral-1.png</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-badge badge-hot">Más completo</div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Gestión completa</div>
+          <div class="product-name">Planilla Integral de Gestión PyME</div>
+          <div class="product-desc">Todo lo que necesitas en un solo archivo: ingresos, gastos, balance, flujo de caja, indicadores financieros y dashboard de gestión mensual con semáforos automáticos.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Dashboard ejecutivo con semáforos</span></div>
+            <div class="product-include"><span>✓</span><span>Registro de ingresos y gastos con categorías</span></div>
+            <div class="product-include"><span>✓</span><span>Balance + flujo de caja + resultados</span></div>
+            <div class="product-include"><span>✓</span><span>15+ indicadores calculados automáticamente</span></div>
+            <div class="product-include"><span>✓</span><span>Proyección a 3 meses</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$24.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('integral','$24.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P2 — FACTURACIÓN IVA -->
+      <div class="product-card fade-up d1" data-cat="gestion-especifica" onclick="openModal('facturacion')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">🧾</div><div class="preview-ph-text">Gestor de Facturación e IVA<br>img/facturacion-1.png</div></div>
+            </div>
+          </div>
+          <div class="product-badge badge-new">Nuevo</div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Gestión tributaria</div>
+          <div class="product-name">Gestor de Facturación e IVA para PyMEs</div>
+          <div class="product-desc">Registra facturas emitidas y recibidas, calcula el IVA a pagar mes a mes y lleva el control de tus créditos fiscales de forma simple.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Registro de facturas emitidas y recibidas</span></div>
+            <div class="product-include"><span>✓</span><span>Cálculo automático IVA a pagar</span></div>
+            <div class="product-include"><span>✓</span><span>Control de crédito fiscal</span></div>
+            <div class="product-include"><span>✓</span><span>Resumen mensual listo para declarar</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$7.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('facturacion','$7.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P3 — ESTADOS FINANCIEROS COMPLETOS -->
+      <div class="product-card featured fade-up d2" data-cat="estados" onclick="openModal('estados')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">📋</div><div class="preview-ph-text">Estados Financieros Completos<br>img/estados-1.png</div></div>
+            </div>
+          </div>
+          <div class="product-badge badge-pack">Pack 5 en 1</div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Estados financieros</div>
+          <div class="product-name">Estados Financieros Completos</div>
+          <div class="product-desc">Los 5 estados financieros esenciales en un solo archivo: estado de resultados, balance general, flujo de caja, estado de cambio de patrimonio y estado de flujo de efectivo.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Estado de Resultados</span></div>
+            <div class="product-include"><span>✓</span><span>Balance General</span></div>
+            <div class="product-include"><span>✓</span><span>Flujo de Caja</span></div>
+            <div class="product-include"><span>✓</span><span>Estado de Cambio de Patrimonio</span></div>
+            <div class="product-include"><span>✓</span><span>Estado de Flujo de Efectivo</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$19.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('estados','$19.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P4 — ESTADO RESULTADOS -->
+      <div class="product-card fade-up" data-cat="estados" onclick="openModal('resultado')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">📈</div><div class="preview-ph-text">Estado de Resultados<br>img/resultado-1.png</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Estado financiero</div>
+          <div class="product-name">Estado de Resultados Profesional</div>
+          <div class="product-desc">Calcula margen bruto, margen neto y utilidad. Compara 3 períodos simultáneos y detecta tendencias mes a mes de forma automática.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>3 períodos comparativos</span></div>
+            <div class="product-include"><span>✓</span><span>Margen bruto y neto automático</span></div>
+            <div class="product-include"><span>✓</span><span>Semáforo de salud financiera</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$4.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('resultado','$4.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P5 — BALANCE GENERAL -->
+      <div class="product-card fade-up d1" data-cat="estados" onclick="openModal('balance')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">⚖️</div><div class="preview-ph-text">Balance General<br>img/balance-1.png</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Estado financiero</div>
+          <div class="product-name">Balance General Completo</div>
+          <div class="product-desc">Fotografía completa de tu empresa: activos, pasivos y patrimonio. Calcula prueba ácida y razón corriente automáticamente.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Activos corrientes y no corrientes</span></div>
+            <div class="product-include"><span>✓</span><span>Prueba ácida y razón corriente</span></div>
+            <div class="product-include"><span>✓</span><span>Patrimonio neto automático</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$4.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('balance','$4.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P6 — INVENTARIO -->
+      <div class="product-card fade-up d2" data-cat="gestion-especifica" onclick="openModal('inventario')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">📦</div><div class="preview-ph-text">Inventario y Stock<br>img/inventario-1.png</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Gestión específica</div>
+          <div class="product-name">Inventario y Control de Stock</div>
+          <div class="product-desc">Controla tu inventario con valor del stock, rotación estimada, alertas de bajo stock y cálculo automático del costo de ventas.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Valor total del inventario automático</span></div>
+            <div class="product-include"><span>✓</span><span>Alerta de stock mínimo</span></div>
+            <div class="product-include"><span>✓</span><span>Rotación y costo de ventas</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price accent">$3.990</div>
+              <div class="product-price-sub">Pago único · descarga inmediata</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();comprar('inventario','$3.990')">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- P7 — FLUJO DE CAJA (GRATIS) -->
+      <div class="product-card fade-up" data-cat="gratis liquidez" onclick="openModal('flujo')">
+        <div class="product-preview">
+          <div class="preview-gallery">
+            <div class="preview-slide">
+              <div class="preview-ph"><div class="preview-ph-icon">💵</div><div class="preview-ph-text">Flujo de Caja — Gratis<br>img/flujo-1.png</div></div>
+            </div>
+          </div>
+          <div class="product-badge badge-free">Gratis</div>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Liquidez · Gratis</div>
+          <div class="product-name">Flujo de Caja — Método Directo</div>
+          <div class="product-desc">El punto de partida. Controla cuánto dinero entra y sale cada mes. Detecta problemas de liquidez antes de que ocurran. Sin costo, solo tu email.</div>
+          <div class="product-includes">
+            <div class="product-include"><span>✓</span><span>Entradas y salidas detalladas</span></div>
+            <div class="product-include"><span>✓</span><span>Saldo proyectado automático</span></div>
+            <div class="product-include"><span>✓</span><span>Alerta de caja mínima</span></div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price" style="color:var(--green)">Gratis</div>
+              <div class="product-price-sub">Solo deja tu email</div>
+            </div>
+            <a href="index.html#waitlist" class="btn btn-green btn-sm" onclick="event.stopPropagation()">Descargar</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BUNDLE -->
+    <div class="bundle-section fade-up">
+      <div>
+        <div class="bundle-tag">★ Paquete completo</div>
+        <h2>Kit Financiero Analixia — Todo en uno</h2>
+        <p>Las 6 plantillas pagas en un solo paquete. Cubre todo lo que necesitas para analizar, gestionar y tomar decisiones en tu PyME. Actualizaciones incluidas.</p>
+        <div class="bundle-list">
+          <span class="bundle-list-item">Planilla Integral</span>
+          <span class="bundle-list-item">Gestor IVA</span>
+          <span class="bundle-list-item">Estados Financieros Completos</span>
+          <span class="bundle-list-item">Estado Resultados</span>
+          <span class="bundle-list-item">Balance General</span>
+          <span class="bundle-list-item">Inventario</span>
+        </div>
+      </div>
+      <div class="bundle-right">
+        <div class="bundle-old-price">$65.940 por separado</div>
+        <div class="bundle-price">$39.990</div>
+        <button class="btn btn-gold" style="margin-top:14px;width:100%;justify-content:center" onclick="comprar('bundle','$39.990')">Comprar paquete</button>
+        <div class="bundle-save">Ahorras $25.950 (39%)</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  renderCatalog('catalog-products');
-  setupFilters('[data-filter]', '#catalog-products');
-  renderBundle('bundle-shop');
-});
-</script>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="nav-logo">
+        <div class="nav-logo-mark">A</div>
+        <div class="nav-logo-text">Analix<span>ia</span></div>
+      </div>
+      <p>© 2025 Analixia · Hecho en Chile 🇨🇱 · contacto@analixia.cl</p>
+    </div>
+  </div>
+</footer>
 
-  <div id="site-footer"></div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeOut(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <h3 id="modal-name">Producto</h3>
+        <p id="modal-cat">Categoría</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-gallery-wrap">
+      <div class="modal-slides" id="modal-slides"></div>
+      <button class="modal-arrow modal-prev" onclick="mPrev()">‹</button>
+      <button class="modal-arrow modal-next" onclick="mNext()">›</button>
+    </div>
+    <div class="modal-dots" id="modal-dots"></div>
+    <div class="modal-footer">
+      <div>
+        <div class="modal-price-display" id="modal-price">$0</div>
+        <div class="modal-counter" id="modal-counter">1 / 1</div>
+      </div>
+      <div class="modal-footer-btns">
+        <button class="btn btn-outline btn-sm" onclick="closeModal()">Cerrar</button>
+        <button class="btn btn-primary btn-sm" id="modal-buy" onclick="buyFromModal()">Comprar</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-  renderNav('plantillas');
-  renderFooter();
+// Fade up
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)} }), {threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Filtro
+function filterStore(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('#store-grid .product-card');
+  let count = 0;
+  cards.forEach(c => {
+    const cats = c.dataset.cat || '';
+    const show = cat === 'todas' || cats.includes(cat);
+    c.style.display = show ? '' : 'none';
+    if(show) count++;
+  });
+  document.getElementById('store-count').textContent = `${count} plantilla${count!==1?'s':''} disponible${count!==1?'s':''}`;
+}
+
+// Datos de productos
+const PRODS = {
+  integral:{name:'Planilla Integral de Gestión PyME',cat:'Gestión completa',price:'$24.990',images:[]},
+  facturacion:{name:'Gestor de Facturación e IVA para PyMEs',cat:'Gestión tributaria',price:'$7.990',images:[]},
+  estados:{name:'Estados Financieros Completos',cat:'Estados financieros · Pack 5 en 1',price:'$19.990',images:[]},
+  resultado:{name:'Estado de Resultados Profesional',cat:'Estado financiero',price:'$4.990',images:[]},
+  balance:{name:'Balance General Completo',cat:'Estado financiero',price:'$4.990',images:[]},
+  inventario:{name:'Inventario y Control de Stock',cat:'Gestión específica',price:'$3.990',images:[]},
+  flujo:{name:'Flujo de Caja — Método Directo',cat:'Liquidez · Gratis',price:'Gratis',images:[]},
+  bundle:{name:'Kit Financiero Completo',cat:'Paquete completo',price:'$39.990',images:[]}
+};
+
+let mCur = 0, mProd = null;
+
+function openModal(id) {
+  mProd = id;
+  mCur = 0;
+  const p = PRODS[id];
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-cat').textContent = p.cat;
+  document.getElementById('modal-price').textContent = p.price;
+  const buyBtn = document.getElementById('modal-buy');
+  buyBtn.textContent = p.price === 'Gratis' ? 'Descargar gratis' : `Comprar ${p.price}`;
+  buyBtn.className = p.price === 'Gratis' ? 'btn btn-green btn-sm' : 'btn btn-primary btn-sm';
+
+  const slides = document.getElementById('modal-slides');
+  const dots = document.getElementById('modal-dots');
+  slides.innerHTML = '';
+  dots.innerHTML = '';
+
+  if(p.images && p.images.length > 0) {
+    p.images.forEach((src,i) => {
+      const div = document.createElement('div');
+      div.className = 'modal-slide';
+      div.innerHTML = `<img src="${src}" alt="${p.name} vista ${i+1}" loading="lazy">`;
+      slides.appendChild(div);
+      const dot = document.createElement('div');
+      dot.className = 'modal-dot' + (i===0?' active':'');
+      dot.onclick = () => goSlide(i);
+      dots.appendChild(dot);
+    });
+  } else {
+    const div = document.createElement('div');
+    div.className = 'modal-slide';
+    div.innerHTML = `<div class="modal-ph">
+      <div class="modal-ph-icon">📊</div>
+      <div class="modal-ph-title">${p.name}</div>
+      <div class="modal-ph-sub">Las capturas de pantalla de este Excel aparecerán aquí.<br>Para agregar imágenes, coloca los archivos en la carpeta <code>img/</code> de tu proyecto y agrégalos al array de imágenes en el código.</div>
+      <div class="modal-ph-code">images: ['img/${id}-1.png', 'img/${id}-2.png']</div>
+    </div>`;
+    slides.appendChild(div);
+  }
+
+  updateModal();
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function goSlide(n) {
+  const p = PRODS[mProd];
+  const total = p.images.length || 1;
+  mCur = Math.max(0, Math.min(n, total-1));
+  updateModal();
+}
+
+function updateModal() {
+  const p = PRODS[mProd];
+  const total = p.images.length || 1;
+  document.getElementById('modal-slides').style.transform = `translateX(-${mCur*100}%)`;
+  document.getElementById('modal-counter').textContent = `${mCur+1} / ${total}`;
+  document.querySelectorAll('.modal-dot').forEach((d,i) => d.classList.toggle('active', i===mCur));
+}
+
+function mNext() { const p=PRODS[mProd];goSlide((mCur+1)%(p.images.length||1)) }
+function mPrev() { const p=PRODS[mProd];const t=p.images.length||1;goSlide((mCur-1+t)%t) }
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow='' }
+function closeOut(e) { if(e.target.id==='modal') closeModal() }
+
+function comprar(id, precio) {
+  // AQUÍ conectarás Flow.cl o Stripe
+  // Por ahora muestra un alert explicativo
+  alert(`Comprando: ${PRODS[id]?.name || id}\nPrecio: ${precio}\n\nPronto conectaremos Flow.cl para procesar el pago.`);
+}
+function buyFromModal() { comprar(mProd, PRODS[mProd].price) }
+
+// Teclado
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('modal').classList.contains('open')) return;
+  if(e.key==='ArrowRight') mNext();
+  if(e.key==='ArrowLeft') mPrev();
+  if(e.key==='Escape') closeModal();
 });
 </script>
 </body>
