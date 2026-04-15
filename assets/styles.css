@@ -186,6 +186,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 }
 .hero-copy h1 { max-width: 760px; }
 .hero-lead { font-size: 1.14rem; color: var(--text); max-width: 640px; }
+.hero-summary { max-width: 620px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 .hero-panel, .page-shell, .help-banner-card { position: relative; overflow: hidden; }
 .hero-panel {
@@ -234,6 +235,15 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   background: rgba(255, 255, 255, 0.03);
 }
 .chart-shell svg { width: 100%; height: auto; }
+.future-note {
+  margin-top: 16px;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
 .trust-strip, .catalog-callout {
   padding: 22px 24px;
   display: grid;
@@ -263,8 +273,30 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .statement-grid { grid-template-columns: repeat(3, 1fr); }
 .value-grid { grid-template-columns: repeat(4, 1fr); }
 .legal-grid { grid-template-columns: repeat(2, 1fr); }
+.future-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 18px;
+}
 .statement-card, .value-card, .legal-card, .narrative-card, .principle-card, .growth-card, .waitlist-panel { padding: 24px; }
+.future-card,
+.reserve-card,
+.prose-card {
+  padding: 24px;
+}
 .split-layout, .growth-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.page-title-compact {
+  max-width: 900px;
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+}
+.page-lead-compact {
+  max-width: 760px;
+  font-size: 1rem;
+}
+.prose-card p {
+  max-width: 900px;
+  font-size: 1.02rem;
+}
 .check-list, .info-list {
   list-style: none;
   padding: 0;
@@ -502,6 +534,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   .statement-grid { grid-template-columns: 1fr; }
   .value-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .future-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 920px) {
   .header-inner {
@@ -512,6 +545,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   .main-nav { width: 100%; overflow-x: auto; padding-bottom: 6px; }
   .header-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; }
   .help-shortcuts { grid-template-columns: 1fr; }
+  .future-note { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 760px) {
   .section { padding: 72px 0; }
