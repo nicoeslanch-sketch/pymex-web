@@ -1,15 +1,16 @@
 :root {
   --bg: #06101d;
   --bg-deep: #0a1b31;
-  --surface: rgba(9, 24, 43, 0.72);
-  --surface-strong: rgba(11, 29, 50, 0.92);
-  --line: rgba(255, 255, 255, 0.08);
+  --surface: rgba(11, 26, 48, 0.78);
+  --surface-strong: rgba(15, 34, 58, 0.96);
+  --line: rgba(199, 168, 106, 0.16);
   --line-strong: #f4f7fb;
   --text: #edf3fb;
   --muted: #a3b2c7;
   --accent: #17365f;
-  --accent-soft: #9fb4cf;
+  --accent-soft: #b1c0d5;
   --gold: #c7a86a;
+  --gold-soft: #e1c691;
   --green: #43c59e;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
   --radius: 24px;
@@ -25,8 +26,9 @@ body {
   color: var(--text);
   font-family: var(--ff-body);
   background:
-    radial-gradient(circle at 10% 12%, rgba(27, 63, 108, 0.22), transparent 24%),
-    radial-gradient(circle at 84% 14%, rgba(199, 168, 106, 0.14), transparent 20%),
+    radial-gradient(circle at 10% 12%, rgba(23, 54, 95, 0.36), transparent 24%),
+    radial-gradient(circle at 84% 14%, rgba(199, 168, 106, 0.22), transparent 20%),
+    radial-gradient(circle at 50% 62%, rgba(199, 168, 106, 0.08), transparent 26%),
     linear-gradient(180deg, #06101d 0%, #0a1b31 100%);
   overflow-x: hidden;
 }
@@ -52,9 +54,15 @@ body::after {
   right: -12rem;
   top: -12rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(79, 140, 255, 0.16), transparent 64%);
+  background: radial-gradient(circle, rgba(199, 168, 106, 0.18), transparent 64%);
   filter: blur(24px);
   pointer-events: none;
+}
+main > section:nth-of-type(odd) {
+  background: linear-gradient(180deg, rgba(7, 16, 29, 0), rgba(16, 35, 60, 0.24));
+}
+main > section:nth-of-type(even) {
+  background: linear-gradient(180deg, rgba(199, 168, 106, 0.04), rgba(10, 27, 49, 0.08));
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -96,7 +104,9 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 }
 .hidden { display: none !important; }
 .card {
-  background: linear-gradient(180deg, rgba(8, 21, 38, 0.94), rgba(9, 24, 43, 0.78));
+  background:
+    linear-gradient(180deg, rgba(10, 24, 44, 0.96), rgba(9, 24, 43, 0.84)),
+    linear-gradient(135deg, rgba(199, 168, 106, 0.05), transparent 42%);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -115,7 +125,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn-primary { background: linear-gradient(135deg, #b89556, #d8ba82); color: #09111f; }
-.btn-secondary { border-color: var(--line); color: var(--text); background: rgba(255, 255, 255, 0.02); }
+.btn-secondary { border-color: rgba(199, 168, 106, 0.24); color: var(--text); background: rgba(199, 168, 106, 0.06); }
 .btn-sm { padding: 10px 16px; font-size: 0.92rem; }
 .pill, .tag {
   display: inline-flex;
@@ -134,8 +144,8 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   top: 0;
   z-index: 30;
   backdrop-filter: blur(16px);
-  background: rgba(6, 14, 25, 0.82);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(6, 14, 25, 0.88);
+  border-bottom: 1px solid rgba(199, 168, 106, 0.18);
 }
 .header-inner {
   min-height: 78px;
@@ -166,7 +176,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   color: var(--muted);
   font-size: 0.95rem;
 }
-.main-nav a:hover, .main-nav a.active { background: rgba(255, 255, 255, 0.06); color: var(--text); }
+.main-nav a:hover, .main-nav a.active { background: rgba(199, 168, 106, 0.12); color: #fff4df; }
 .header-actions { display: flex; align-items: center; gap: 10px; }
 .header-note {
   padding: 7px 12px;
@@ -191,6 +201,9 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .hero-panel, .page-shell, .help-banner-card { position: relative; overflow: hidden; }
 .hero-panel {
   padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(9, 24, 43, 0.96), rgba(16, 34, 56, 0.88)),
+    radial-gradient(circle at 85% 12%, rgba(199, 168, 106, 0.14), transparent 18%);
 }
 .hero-photo-frame {
   position: relative;
@@ -301,6 +314,13 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   grid-template-columns: 1fr auto;
   gap: 18px;
   align-items: center;
+}
+.trust-strip,
+.catalog-callout,
+.reserve-card,
+.future-card:nth-child(2) {
+  background:
+    linear-gradient(135deg, rgba(199, 168, 106, 0.08), rgba(9, 24, 43, 0.88) 42%, rgba(199, 168, 106, 0.06));
 }
 .trust-strip strong { display: block; margin-bottom: 6px; font-family: var(--ff-head); font-size: 1.1rem; }
 .inline-stats { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
@@ -499,8 +519,10 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .page-shell {
   padding: 26px;
   border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(8, 21, 38, 0.9), rgba(9, 24, 43, 0.72));
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background:
+    linear-gradient(180deg, rgba(9, 24, 43, 0.94), rgba(12, 31, 54, 0.78)),
+    radial-gradient(circle at 88% 14%, rgba(199, 168, 106, 0.16), transparent 16%);
+  border: 1px solid rgba(199, 168, 106, 0.18);
 }
 .breadcrumbs { margin-bottom: 12px; color: var(--muted); font-size: 0.92rem; }
 .product-detail {
@@ -564,9 +586,9 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   border-radius: 28px;
   background:
     linear-gradient(180deg, rgba(6, 14, 25, 0.28), rgba(6, 14, 25, 0.72)),
-    radial-gradient(circle at 20% 20%, rgba(79, 140, 255, 0.36), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(199, 168, 106, 0.3), transparent 28%),
     linear-gradient(135deg, rgba(12, 30, 54, 0.98), rgba(17, 42, 71, 0.94));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(199, 168, 106, 0.18);
   box-shadow: var(--shadow);
 }
 .help-banner-card h1 { max-width: 660px; }
@@ -606,7 +628,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .footer {
   margin-top: 34px;
   padding: 52px 0 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(199, 168, 106, 0.22);
 }
 .footer-grid {
   display: grid;

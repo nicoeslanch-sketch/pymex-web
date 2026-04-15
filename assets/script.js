@@ -23,7 +23,7 @@ function renderChrome() {
             <a href="index.html" class="${page === "home" ? "active" : ""}">Inicio</a>
             <a href="tienda.html" class="${page === "tienda" || page === "producto" ? "active" : ""}">Tienda</a>
             <a href="nosotros.html" class="${page === "nosotros" ? "active" : ""}">Nosotros</a>
-            <a href="legal.html" class="${["legal", "terminos", "privacidad", "reembolsos"].includes(page) ? "active" : ""}">Legal</a>
+            <a href="legal.html" class="${["legal", "terminos", "privacidad", "reembolsos"].includes(page) ? "active" : ""}">Términos y condiciones</a>
             <a href="ayuda.html" class="${page === "ayuda" ? "active" : ""}">Ayuda</a>
           </nav>
           <div class="header-actions">
@@ -65,10 +65,10 @@ function renderChrome() {
               </div>
             </div>
             <div>
-              <h3>Legal</h3>
+              <h3>Términos y condiciones</h3>
               <div class="footer-links">
-                <a href="legal.html">Centro legal</a>
-                <a href="terminos.html">Términos</a>
+                <a href="legal.html">Términos y condiciones</a>
+                <a href="terminos.html">Términos y condiciones</a>
                 <a href="privacidad.html">Privacidad</a>
                 <a href="reembolsos.html">Reembolsos</a>
               </div>
