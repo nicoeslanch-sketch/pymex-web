@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <title>Centro de ayuda | ADS Veris</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Centro de ayuda de ADS Veris para actualizar textos, imágenes, logo, productos y formularios.">
+<meta name="description" content="Centro de ayuda y contacto para clientes de ADS Veris.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
     <div class="container">
       <div class="help-banner-card">
         <span class="eyebrow">Centro de ayuda</span>
-        <h1>Cómo mantener ADS Veris sin romper el diseño.</h1>
-        <p>Esta guía está pensada para que puedas actualizar contenidos, imágenes, logo, productos y formularios sin desordenar la estructura del proyecto.</p>
+        <h1 class="help-title-compact">Ayuda, soporte y contacto ADS Veris</h1>
+        <p>Encuentra nuestros canales de atención, redes sociales y respuestas rápidas para clientes y empresas interesadas.</p>
       </div>
     </div>
   </section>
@@ -29,30 +29,35 @@
   <section class="section section-tight help-shortcuts-wrap">
     <div class="container">
       <div class="help-shortcuts card">
-        <a href="#imagenes">Cambiar imágenes</a>
-        <a href="#textos">Cambiar textos</a>
-        <a href="#logo">Cambiar logo</a>
-        <a href="#waitlist">Conectar waitlist</a>
-        <a href="#productos">Agregar productos</a>
+        <a href="#planes">Planes de servicio</a>
+        <a href="#redes">Nuestras redes</a>
+        <a href="#soporte">Soporte ADS Veris</a>
+        <a href="#whatsapp">WhatsApp directo</a>
+        <a href="#faq">Preguntas frecuentes</a>
       </div>
     </div>
   </section>
 
   <section class="section section-tight" style="padding-top:0">
     <div class="container">
-      <div class="help-illustrations">
-        <article class="card help-figure-card">
-          <img src="assets/images/businessman-board-1.png" alt="Ilustración de ejecutivo presentando una pizarra">
-          <div>
-            <h3>Contenido y soporte</h3>
-            <p>Úsalo como apoyo visual en páginas internas o futuras secciones educativas sin romper el sistema visual principal.</p>
-          </div>
+      <div class="help-client-grid">
+        <article class="card help-service-card" id="planes">
+          <span class="eyebrow">Planes de servicio</span>
+          <h3>Atención comercial y soporte</h3>
+          <p>Consulta por plantillas individuales, la colección completa ADS Veris o futuras soluciones ligadas a análisis de datos.</p>
+          <ul class="info-list">
+            <li>Plantillas para necesidades puntuales</li>
+            <li>Colección completa con enfoque estratégico</li>
+            <li>Atención para empresas y coordinación comercial</li>
+          </ul>
         </article>
-        <article class="card help-figure-card">
-          <img src="assets/images/businessman-board-2.png" alt="Ilustración de ejecutivo señalando una presentación">
-          <div>
-            <h3>Explicación de producto</h3>
-            <p>Esta línea visual funciona mejor en ayuda, onboarding o contenido educativo que en las páginas más corporativas del sitio.</p>
+        <article class="card help-service-card" id="soporte">
+          <span class="eyebrow">Soporte ADS Veris</span>
+          <h3>Escríbenos por los canales activos</h3>
+          <p>Si tienes dudas sobre una compra, acceso a un archivo o uso general del servicio, puedes escribirnos directamente por correo o WhatsApp.</p>
+          <div class="support-lines">
+            <a class="support-pill" href="mailto:soporte@adsveris.cl">soporte@adsveris.cl</a>
+            <a class="support-pill" href="mailto:ventas@adsveris.cl">ventas@adsveris.cl</a>
           </div>
         </article>
       </div>
@@ -60,39 +65,56 @@
   </section>
 
   <section class="section section-tight">
-    <div class="container help-grid">
-      <article class="help-side">
-        <span class="eyebrow">Soporte interno</span>
-        <h2>Canales principales para mantener el sitio.</h2>
-        <p>La idea de esta página se inspira en una estructura de centro de ayuda con accesos rápidos, pero adaptada al tono oscuro, sobrio y corporativo de ADS Veris.</p>
-      </article>
-      <div class="help-content">
-        <article class="card faq-item" id="imagenes">
-          <h3>1. Cómo cambiar las imágenes de cada producto</h3>
-          <p>Guarda las capturas reales del Excel dentro de <code>assets/productos/nombre-del-producto/</code> y luego actualiza las rutas del producto en <code>assets/products.js</code>.</p>
-          <p>Busca la propiedad <code>images</code> y reemplaza los SVG temporales por tus capturas reales. El primer elemento de <code>images</code> se usa como imagen principal de la ficha.</p>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Redes y contacto</span>
+          <h2>Conecta con ADS Veris por el canal que prefieras.</h2>
+        </div>
+      </div>
+      <div class="social-grid" id="redes">
+        <article class="card social-card">
+          <img src="assets/images/icon-instagram.png" alt="Icono de Instagram">
+          <div>
+            <h3>Instagram XXX</h3>
+            <p>Actualizaciones, contenido visual y novedades de marca.</p>
+            <a class="text-link" href="https://instagram.com" target="_blank" rel="noreferrer">Ir a Instagram</a>
+          </div>
         </article>
-        <article class="card faq-item" id="textos">
-          <h3>2. Cómo cambiar textos del sitio</h3>
-          <p>Los textos fijos de páginas se editan directamente en los archivos HTML. El contenido de tarjetas, catálogo y fichas de producto vive en <code>assets/products.js</code>. El menú y footer comunes están en <code>assets/script.js</code>.</p>
+        <article class="card social-card">
+          <img src="assets/images/icon-linkedin.png" alt="Icono de LinkedIn">
+          <div>
+            <h3>LinkedIn ADS Veris</h3>
+            <p>Visión empresarial, producto y publicaciones más corporativas.</p>
+            <a class="text-link" href="https://linkedin.com" target="_blank" rel="noreferrer">Ir a LinkedIn</a>
+          </div>
         </article>
-        <article class="card faq-item" id="logo">
-          <h3>3. Cómo cambiar el logo</h3>
-          <p>Hoy el sitio usa un logo tipográfico renderizado desde <code>assets/script.js</code>. Si luego quieres usar un archivo real, reemplaza el bloque de marca en <code>renderChrome()</code> por una etiqueta <code>img</code> o <code>svg</code> propia y conserva la clase <code>brand</code>.</p>
+        <article class="card social-card" id="whatsapp">
+          <img src="assets/images/icon-whatsapp.png" alt="Icono de WhatsApp">
+          <div>
+            <h3>WhatsApp +56 9 4821 7345</h3>
+            <p>Canal rápido para soporte inicial, consultas y coordinación comercial.</p>
+            <a class="text-link" href="https://wa.me/56948217345" target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+          </div>
         </article>
-        <article class="card faq-item" id="waitlist">
-          <h3>4. Cómo conectar la lista de espera después</h3>
-          <p>El formulario actual solo valida el email y muestra un estado visual. La conexión real debe implementarse en la función <code>handleWaitlistSubmit()</code> dentro de <code>assets/script.js</code>.</p>
-          <p>Ahí puedes integrar Supabase, Resend, Formspree o tu backend propio mediante <code>fetch</code>.</p>
-        </article>
-        <article class="card faq-item" id="productos">
-          <h3>5. Cómo agregar un nuevo producto</h3>
-          <p>Agrega un nuevo objeto dentro del arreglo de <code>assets/products.js</code> con su <code>slug</code>, nombre, precio, categoría, descripción e imágenes. El catálogo y la página de detalle lo reconocerán automáticamente.</p>
-          <p>Si el producto necesita imágenes nuevas, crea una carpeta consistente dentro de <code>assets/productos/</code> para mantener el orden visual del proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container">
+      <div class="help-faq-shell" id="faq">
+        <article class="card faq-item">
+          <h3>1. ¿Cómo compro una plantilla?</h3>
+          <p>Puedes escribirnos por soporte o por WhatsApp para coordinar la compra mientras el checkout automático aún no está conectado.</p>
         </article>
         <article class="card faq-item">
-          <h3>6. Pagos y reseñas</h3>
-          <p>La web deja comentarios claros donde más adelante podrás conectar pagos reales y un sistema de reseñas. Por ahora los botones de compra funcionan como coordinación comercial para no fingir una integración aún inexistente.</p>
+          <h3>2. ¿Qué pasa si una plantilla presenta una falla real?</h3>
+          <p>ADS Veris revisará el archivo y priorizará corrección o reemplazo. Si el problema lo justifica y no puede resolverse razonablemente, se podrá gestionar devolución.</p>
+        </article>
+        <article class="card faq-item">
+          <h3>3. ¿Dónde veo la futura plataforma?</h3>
+          <p>Puedes revisar la página de plataforma de análisis y dejar tu correo en la lista de espera para futuras novedades.</p>
         </article>
       </div>
     </div>

@@ -28,7 +28,7 @@ function renderChrome() {
           </nav>
           <div class="header-actions">
             <span class="header-note">Herramientas empresariales con lógica de análisis</span>
-            <a href="plataforma.html" class="btn btn-primary btn-sm">Lista de espera</a>
+            <a href="plataforma.html" class="btn btn-primary btn-sm">Plataforma de análisis</a>
           </div>
         </div>
       </header>
@@ -60,15 +60,14 @@ function renderChrome() {
               <h3>Empresa</h3>
               <div class="footer-links">
                 <a href="contacto.html">Contacto</a>
-                <a href="plataforma.html">Visión futura</a>
+                <a href="plataforma.html">Plataforma de análisis</a>
                 <a href="producto.html?id=planilla-integral-gestion-pyme">Producto destacado</a>
               </div>
             </div>
             <div>
-              <h3>Términos y condiciones</h3>
+              <h3>Información</h3>
               <div class="footer-links">
                 <a href="legal.html">Términos y condiciones</a>
-                <a href="terminos.html">Términos y condiciones</a>
                 <a href="privacidad.html">Privacidad</a>
                 <a href="reembolsos.html">Reembolsos</a>
               </div>
@@ -76,7 +75,7 @@ function renderChrome() {
           </div>
           <div class="footer-bottom">
             <span>© <span data-current-year></span> ADS Veris. Del dato al criterio.</span>
-            <span>Legal y soporte en páginas separadas dentro del mismo proyecto.</span>
+            <span>Soporte, documentos e información disponibles dentro del mismo proyecto.</span>
           </div>
         </div>
       </footer>
