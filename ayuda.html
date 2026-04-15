@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Ayuda — Analixia</title>
+<title>Centro de ayuda | ADS Veris</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Centro de ayuda de ADS Veris para actualizar textos, imágenes, logo, productos y formularios.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 <script defer src="assets/products.js"></script>
 <script defer src="assets/script.js"></script>
-
 </head>
 <body data-page="ayuda">
 <div data-header></div>
+
 <main>
-  <section class="page-hero">
+  <section class="help-banner">
     <div class="container">
-      <div class="breadcrumbs"><a href="index.html">Inicio</a> / Ayuda</div>
-      <span class="eyebrow">Guía de edición</span>
-      <h1>Cómo cambiar imágenes, textos y formularios.</h1>
-      <p>Esta página está pensada para ayudarte a mantener el sitio sin perderte.</p>
+      <div class="help-banner-card">
+        <span class="eyebrow">Centro de ayuda</span>
+        <h1>Cómo mantener ADS Veris sin romper el diseño.</h1>
+        <p>Esta guía está pensada para que puedas actualizar contenidos, imágenes, logo, productos y formularios sin desordenar la estructura del proyecto.</p>
+      </div>
     </div>
   </section>
-  <section class="section-tight">
-    <div class="container faq">
-      <div class="card faq-item">
-        <h3>1. Cambiar imágenes de las planillas</h3>
-        <p>Guarda tus capturas dentro de <code>assets/productos/nombre-del-producto/</code> y luego reemplaza las rutas en <code>assets/products.js</code>.</p>
+
+  <section class="section section-tight help-shortcuts-wrap">
+    <div class="container">
+      <div class="help-shortcuts card">
+        <a href="#imagenes">Cambiar imágenes</a>
+        <a href="#textos">Cambiar textos</a>
+        <a href="#logo">Cambiar logo</a>
+        <a href="#waitlist">Conectar waitlist</a>
+        <a href="#productos">Agregar productos</a>
       </div>
-      <div class="card faq-item">
-        <h3>2. Cambiar textos del sitio</h3>
-        <p>Edita los archivos HTML para texto de página y <code>assets/script.js</code> para tarjetas o navegación común.</p>
-      </div>
-      <div class="card faq-item">
-        <h3>3. Conectar lista de espera a base de datos</h3>
-        <p>El formulario hoy guarda en localStorage. La siguiente integración recomendada es Supabase, Airtable o un endpoint propio.</p>
-      </div>
-      <div class="card faq-item">
-        <h3>4. Publicar cambios</h3>
-        <p>Guarda, luego ejecuta <code>git add .</code>, <code>git commit -m "actualización"</code> y <code>git push</code>.</p>
-      </div>
-      <div class="card faq-item">
-        <h3>5. Qué botones llevan a la plataforma futura</h3>
-        <p>Los CTA de “Plataforma IA”, “Lista de espera” y “robot / análisis” apuntan a <code>plataforma.html</code>.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container help-grid">
+      <article class="help-side">
+        <span class="eyebrow">Soporte interno</span>
+        <h2>Canales principales para mantener el sitio.</h2>
+        <p>La idea de esta página se inspira en una estructura de centro de ayuda con accesos rápidos, pero adaptada al tono oscuro, sobrio y corporativo de ADS Veris.</p>
+      </article>
+      <div class="help-content">
+        <article class="card faq-item" id="imagenes">
+          <h3>1. Cómo cambiar las imágenes de cada producto</h3>
+          <p>Guarda las capturas reales del Excel dentro de <code>assets/productos/nombre-del-producto/</code> y luego actualiza las rutas del producto en <code>assets/products.js</code>.</p>
+          <p>Busca la propiedad <code>images</code> y reemplaza los SVG temporales por tus capturas reales. El primer elemento de <code>images</code> se usa como imagen principal de la ficha.</p>
+        </article>
+        <article class="card faq-item" id="textos">
+          <h3>2. Cómo cambiar textos del sitio</h3>
+          <p>Los textos fijos de páginas se editan directamente en los archivos HTML. El contenido de tarjetas, catálogo y fichas de producto vive en <code>assets/products.js</code>. El menú y footer comunes están en <code>assets/script.js</code>.</p>
+        </article>
+        <article class="card faq-item" id="logo">
+          <h3>3. Cómo cambiar el logo</h3>
+          <p>Hoy el sitio usa un logo tipográfico renderizado desde <code>assets/script.js</code>. Si luego quieres usar un archivo real, reemplaza el bloque de marca en <code>renderChrome()</code> por una etiqueta <code>img</code> o <code>svg</code> propia y conserva la clase <code>brand</code>.</p>
+        </article>
+        <article class="card faq-item" id="waitlist">
+          <h3>4. Cómo conectar la lista de espera después</h3>
+          <p>El formulario actual solo valida el email y muestra un estado visual. La conexión real debe implementarse en la función <code>handleWaitlistSubmit()</code> dentro de <code>assets/script.js</code>.</p>
+          <p>Ahí puedes integrar Supabase, Resend, Formspree o tu backend propio mediante <code>fetch</code>.</p>
+        </article>
+        <article class="card faq-item" id="productos">
+          <h3>5. Cómo agregar un nuevo producto</h3>
+          <p>Agrega un nuevo objeto dentro del arreglo de <code>assets/products.js</code> con su <code>slug</code>, nombre, precio, categoría, descripción e imágenes. El catálogo y la página de detalle lo reconocerán automáticamente.</p>
+          <p>Si el producto necesita imágenes nuevas, crea una carpeta consistente dentro de <code>assets/productos/</code> para mantener el orden visual del proyecto.</p>
+        </article>
+        <article class="card faq-item">
+          <h3>6. Pagos y reseñas</h3>
+          <p>La web deja comentarios claros donde más adelante podrás conectar pagos reales y un sistema de reseñas. Por ahora los botones de compra funcionan como coordinación comercial para no fingir una integración aún inexistente.</p>
+        </article>
       </div>
     </div>
   </section>
 </main>
+
 <div data-footer></div>
 </body>
 </html>
