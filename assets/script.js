@@ -16,7 +16,9 @@ function renderChrome() {
       <header class="site-header">
         <div class="container header-inner">
           <a class="brand" href="index.html" aria-label="Ir a inicio">
-            <span class="brand-mark">AV</span>
+            <span class="brand-mark">
+              <img src="assets/images/logo-ads-veris.png" alt="Logo ADS Veris">
+            </span>
             <span class="brand-name">ADS <span>Veris</span></span>
           </a>
           <nav class="main-nav" aria-label="Principal">
@@ -42,7 +44,9 @@ function renderChrome() {
           <div class="footer-grid">
             <div>
               <div class="brand">
-                <span class="brand-mark">AV</span>
+                <span class="brand-mark">
+                  <img src="assets/images/logo-ads-veris.png" alt="Logo ADS Veris">
+                </span>
                 <span class="brand-name">ADS <span>Veris</span></span>
               </div>
               <p class="small footer-copy">ADS Veris crea herramientas empresariales para que una PyME pueda ordenar, visualizar y comprender mejor su negocio.</p>
