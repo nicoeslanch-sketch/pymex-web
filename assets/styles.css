@@ -515,6 +515,9 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   height: 170px;
   object-fit: cover;
 }
+.future-visual img {
+  height: 180px;
+}
 .split-layout, .growth-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .about-story-grid {
   display: grid;
@@ -906,6 +909,11 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 }
 .about-editorial {
   grid-template-columns: 1.1fr 0.9fr;
+}
+.about-visual-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
 }
 .footer {
   margin-top: 34px;
