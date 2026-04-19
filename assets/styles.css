@@ -154,6 +154,11 @@ button, input, textarea { font: inherit; }
 .section-light .section-head .eyebrow {
   color: #10233b;
 }
+.section-light .section-head.section-head-light h2,
+.section-light .section-head.section-head-light p,
+.section-light .section-head.section-head-light .eyebrow {
+  color: #eef7fb;
+}
 .eyebrow {
   display: inline-flex;
   align-items: center;
