@@ -263,19 +263,24 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .site-header .brand {
   gap: 13px;
 }
-.site-header .brand-mark {
+.site-header .brand-mark,
+.footer .brand-mark {
   width: 56px;
   height: 56px;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.03);
 }
-.site-header .brand-mark img {
+.site-header .brand-mark img,
+.footer .brand-mark img {
   width: 100%;
   height: 100%;
   transform: scale(2.72);
   transform-origin: center;
 }
 .site-header .brand-name {
+  font-size: 1.42rem;
+}
+.footer .brand-name {
   font-size: 1.42rem;
 }
 .main-nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
@@ -1215,11 +1220,15 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
     align-items: flex-start;
     flex-direction: column;
   }
-  .site-header .brand-mark {
+  .site-header .brand-mark,
+  .footer .brand-mark {
     width: 54px;
     height: 54px;
   }
   .site-header .brand-name {
+    font-size: 1.32rem;
+  }
+  .footer .brand-name {
     font-size: 1.32rem;
   }
   .comparison-shell {
@@ -1246,11 +1255,15 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
     display: inline-flex;
     margin-bottom: 14px;
   }
-  .site-header .brand-mark {
+  .site-header .brand-mark,
+  .footer .brand-mark {
     width: 50px;
     height: 50px;
   }
   .site-header .brand-name {
+    font-size: 1.22rem;
+  }
+  .footer .brand-name {
     font-size: 1.22rem;
   }
   .section-head, .trust-strip, .catalog-callout, .footer-bottom, .waitlist-inline { display: grid; grid-template-columns: 1fr; }
