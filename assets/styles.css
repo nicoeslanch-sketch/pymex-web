@@ -25,7 +25,7 @@ body {
   min-height: 100vh;
   color: var(--text);
   font-family: var(--ff-body);
-  background: #17324a;
+  background: #1d3b55;
   overflow-x: hidden;
 }
 body::before {
@@ -72,7 +72,7 @@ button, input, textarea { font: inherit; }
     linear-gradient(rgba(108, 141, 168, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(108, 141, 168, 0.1) 1px, transparent 1px),
     radial-gradient(circle at 85% 18%, rgba(199, 168, 106, 0.1), transparent 18%),
-    linear-gradient(180deg, #1a3853, #254a6b);
+    linear-gradient(180deg, #23425e, #315779);
   background-size: 48px 48px, 48px 48px, auto, auto;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(199, 168, 106, 0.14);
@@ -968,6 +968,19 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   height: 170px;
   min-height: 170px;
   object-fit: cover;
+}
+.applied-reading-photo {
+  background:
+    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
+    radial-gradient(circle at 50% 30%, rgba(95, 184, 181, 0.12), transparent 42%);
+}
+.applied-reading-photo img {
+  height: 200px;
+  min-height: 200px;
+  object-fit: contain;
+  object-position: center;
+  padding: 14px 18px 6px;
+  background: linear-gradient(180deg, rgba(8, 20, 31, 0.2), rgba(8, 20, 31, 0.02));
 }
 .about-future .editorial-photo-copy {
   padding: 18px 20px 20px;
