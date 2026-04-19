@@ -3,6 +3,9 @@
   --bg-deep: #14304d;
   --surface: rgba(15, 34, 58, 0.8);
   --surface-strong: rgba(19, 43, 70, 0.96);
+  --card-standard-bg:
+    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
+    linear-gradient(135deg, rgba(30, 201, 184, 0.08), transparent 42%);
   --line: rgba(199, 168, 106, 0.16);
   --line-strong: #f4f7fb;
   --text: #edf3fb;
@@ -111,9 +114,7 @@ button, input, textarea { font: inherit; }
   border-color: rgba(16, 35, 59, 0.12);
 }
 .section-light .card {
-  background:
-    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
-    linear-gradient(135deg, rgba(30, 201, 184, 0.08), transparent 42%);
+  background: var(--card-standard-bg);
   border-color: rgba(95, 184, 181, 0.16);
   box-shadow: 0 24px 60px rgba(10, 22, 34, 0.18);
 }
@@ -193,9 +194,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 }
 .hidden { display: none !important; }
 .card {
-  background:
-    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
-    linear-gradient(135deg, rgba(30, 201, 184, 0.08), transparent 42%);
+  background: var(--card-standard-bg);
   border: 1px solid rgba(95, 184, 181, 0.16);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -465,14 +464,11 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .catalog-callout,
 .reserve-card,
 .future-card:nth-child(2) {
-  background:
-    linear-gradient(135deg, rgba(199, 168, 106, 0.08), rgba(9, 24, 43, 0.88) 42%, rgba(199, 168, 106, 0.06));
+  background: var(--card-standard-bg);
 }
 .section-light .trust-strip,
 .section-light .catalog-callout {
-  background:
-    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
-    linear-gradient(135deg, rgba(30, 201, 184, 0.08), transparent 42%);
+  background: var(--card-standard-bg);
 }
 .trust-strip strong { display: block; margin-bottom: 6px; font-family: var(--ff-head); font-size: 1.1rem; }
 .inline-stats { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
@@ -689,23 +685,23 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .filter-btn {
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--muted);
+  border: 1px solid rgba(216, 177, 104, 0.28);
+  background: linear-gradient(135deg, #c19a54, #e0c589);
+  color: #09111f;
+  font-weight: 800;
   cursor: pointer;
 }
 .filter-btn.active, .filter-btn:hover {
-  color: var(--text);
-  border-color: rgba(79, 140, 255, 0.22);
-  background: rgba(79, 140, 255, 0.12);
+  color: #09111f;
+  border-color: rgba(216, 177, 104, 0.46);
+  background: linear-gradient(135deg, #d1ab60, #ecd59e);
+  box-shadow: 0 12px 24px rgba(199, 168, 106, 0.18);
 }
 .page-hero { padding: 72px 0 30px; }
 .page-shell {
   padding: 26px;
   border-radius: var(--radius);
-  background:
-    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
-    linear-gradient(135deg, rgba(30, 201, 184, 0.08), transparent 42%);
+  background: var(--card-standard-bg);
   border: 1px solid rgba(95, 184, 181, 0.16);
 }
 .breadcrumbs { margin-bottom: 12px; color: var(--muted); font-size: 0.92rem; }
@@ -768,17 +764,14 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   min-height: 270px;
   padding: 34px;
   border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(6, 14, 25, 0.28), rgba(6, 14, 25, 0.72)),
-    radial-gradient(circle at 20% 20%, rgba(199, 168, 106, 0.3), transparent 28%),
-    linear-gradient(135deg, rgba(12, 30, 54, 0.98), rgba(17, 42, 71, 0.94));
+  background: var(--card-standard-bg);
   border: 1px solid rgba(199, 168, 106, 0.18);
   box-shadow: var(--shadow);
 }
 .help-banner-card h1 { max-width: 660px; }
 .help-banner-card p { max-width: 560px; }
 .help-shortcuts-wrap { padding-top: 0; }
-.help-shortcuts { display: grid; grid-template-columns: repeat(5, 1fr); overflow: hidden; }
+.help-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; }
 .help-shortcuts a {
   padding: 22px 18px;
   text-align: center;
@@ -975,9 +968,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   object-fit: cover;
 }
 .applied-reading-photo {
-  background:
-    linear-gradient(180deg, rgba(9, 28, 42, 0.98), rgba(16, 49, 64, 0.95)),
-    radial-gradient(circle at 50% 30%, rgba(95, 184, 181, 0.12), transparent 42%);
+  background: var(--card-standard-bg);
 }
 .applied-reading-photo img {
   height: 200px;
