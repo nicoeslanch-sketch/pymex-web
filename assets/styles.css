@@ -268,7 +268,7 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
 .site-header .brand-mark img {
   width: 100%;
   height: 100%;
-  transform: scale(1.72);
+  transform: scale(1.95);
   transform-origin: center;
 }
 .site-header .brand-name {
