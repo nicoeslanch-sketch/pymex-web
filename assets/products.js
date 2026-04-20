@@ -94,7 +94,7 @@ window.ADS_VERIS_PRODUCTS = [
     includes: [
       "Ventas, costos y gastos ordenados",
       "Lectura de utilidad bruta y neta",
-      "Comparación simple entre periodos",
+      "Comparación simple entre períodos",
       "Formato listo para uso interno"
     ],
     outcome: "Más claridad sobre rentabilidad real."
@@ -137,7 +137,7 @@ window.ADS_VERIS_PRODUCTS = [
     thumb: "assets/productos/flujo/1.svg",
     images: ["assets/productos/flujo/1.svg", "assets/productos/flujo/2.svg"],
     summary: "Una de las lecturas más necesarias para cualquier empresa que necesita respirar mejor entre cobros y pagos.",
-    description: "Permite visualizar semanas o periodos tensos y preparar decisiones antes de que el problema llegue al banco o al proveedor.",
+    description: "Permite visualizar semanas o períodos tensos y preparar decisiones antes de que el problema llegue al banco o al proveedor.",
     problem: "Resuelve la falta de anticipación sobre caja disponible y movimientos críticos.",
     includes: [
       "Registro de entradas y salidas",
@@ -189,7 +189,7 @@ window.ADS_VERIS_PRODUCTS = [
     problem: "Resuelve la falta de seguimiento claro sobre cambios patrimoniales.",
     includes: [
       "Estructura base del estado",
-      "Formato ordenado para periodos",
+      "Formato ordenado para períodos",
       "Complemento para informes financieros",
       "Placeholder visual listo para reemplazar por capturas reales"
     ],
