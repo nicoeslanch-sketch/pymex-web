@@ -252,6 +252,44 @@ function renderYear() {
   });
 }
 
+function initHomeMotion() {
+  if (document.body.dataset.page !== "home") return;
+
+  const header = document.querySelector(".site-header");
+  const revealNodes = document.querySelectorAll("[data-reveal]");
+
+  window.requestAnimationFrame(() => {
+    header?.classList.add("is-settled");
+  });
+
+  const syncHeader = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 18);
+  };
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+
+  revealNodes.forEach((node) => {
+    const delay = node.getAttribute("data-reveal-delay");
+    if (delay) {
+      node.style.setProperty("--reveal-delay", `${delay}s`);
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.14,
+    rootMargin: "0px 0px -8% 0px"
+  });
+
+  revealNodes.forEach((node) => observer.observe(node));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderChrome();
   renderFeaturedProducts();
@@ -259,4 +297,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProductDetail();
   bindWaitlistForms();
   renderYear();
+  initHomeMotion();
 });
