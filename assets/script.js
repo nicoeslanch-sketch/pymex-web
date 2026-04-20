@@ -119,6 +119,12 @@ function renderFeaturedProducts() {
   const host = document.querySelector("[data-featured-products]");
   if (!host) return;
   host.innerHTML = getProducts().filter((product) => product.featured).map(productCard).join("");
+  if (document.body.dataset.page === "home") {
+    host.querySelectorAll(".product-card").forEach((card, index) => {
+      card.classList.add("reveal", "reveal-up");
+      card.classList.add(`stagger-${Math.min(index + 1, 6)}`);
+    });
+  }
 }
 
 function updateStoreCounter(host) {
@@ -255,26 +261,7 @@ function renderYear() {
 function initHomeMotion() {
   if (document.body.dataset.page !== "home") return;
 
-  const header = document.querySelector(".site-header");
-  const revealNodes = document.querySelectorAll("[data-reveal]");
-
-  window.requestAnimationFrame(() => {
-    header?.classList.add("is-settled");
-  });
-
-  const syncHeader = () => {
-    header?.classList.toggle("is-scrolled", window.scrollY > 18);
-  };
-
-  syncHeader();
-  window.addEventListener("scroll", syncHeader, { passive: true });
-
-  revealNodes.forEach((node) => {
-    const delay = node.getAttribute("data-reveal-delay");
-    if (delay) {
-      node.style.setProperty("--reveal-delay", `${delay}s`);
-    }
-  });
+  const revealNodes = document.querySelectorAll(".reveal");
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
