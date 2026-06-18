@@ -258,8 +258,8 @@ p { margin: 0 0 14px; color: var(--muted); line-height: 1.75; }
   height: 92%;
   object-fit: contain;
 }
-.brand-name { font-family: var(--ff-head); font-size: 1.24rem; font-weight: 800; }
-.brand-name span { color: var(--accent-soft); }
+.brand-name { font-family: var(--ff-head); font-size: 1.24rem; font-weight: 800; color: #e23b3b; }
+.brand-name span { color: #e23b3b; }
 .site-header .brand {
   gap: 13px;
 }
