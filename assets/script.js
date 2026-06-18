@@ -23,14 +23,14 @@ function renderChrome() {
           </a>
           <nav class="main-nav" aria-label="Principal">
             <a href="index.html" class="${page === "home" ? "active" : ""}">Inicio</a>
-            <a href="tienda.html" class="${page === "tienda" || page === "producto" ? "active" : ""}">Tienda</a>
+            <a href="tienda.html" class="${page === "tienda" || page === "producto" ? "active" : ""}">Soluciones</a>
+            <a href="plataforma.html" class="${page === "plataforma" ? "active" : ""}">Plataforma</a>
             <a href="nosotros.html" class="${page === "nosotros" ? "active" : ""}">Nosotros</a>
-            <a href="legal.html" class="${["legal", "terminos", "privacidad", "reembolsos"].includes(page) ? "active" : ""}">Términos y condiciones</a>
             <a href="ayuda.html" class="${page === "ayuda" ? "active" : ""}">Ayuda</a>
           </nav>
           <div class="header-actions">
-            <span class="header-note">Herramientas empresariales con lógica de análisis</span>
-            <a href="plataforma.html" class="btn btn-primary btn-sm">Plataforma de análisis</a>
+            <a href="#" class="header-login">Iniciar sesión</a>
+            <a href="#" class="btn btn-primary btn-sm">Crear cuenta</a>
           </div>
         </div>
       </header>
@@ -277,6 +277,64 @@ function initHomeMotion() {
   revealNodes.forEach((node) => observer.observe(node));
 }
 
+function initHeroCarousel() {
+  const carousel = document.getElementById("heroCarousel");
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll(".carousel-slide");
+  const dots = document.querySelectorAll("#heroDots .carousel-dot");
+  const prevBtn = document.getElementById("heroPrev");
+  const nextBtn = document.getElementById("heroNext");
+
+  let current = 0;
+  let autoTimer = null;
+  let paused = false;
+
+  function activate(index) {
+    slides[current].classList.remove("is-active");
+    dots[current].classList.remove("is-active");
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add("is-active");
+    dots[current].classList.add("is-active");
+  }
+
+  function next() { activate(current + 1); }
+  function prev() { activate(current - 1); }
+
+  function startAuto() {
+    if (paused) return;
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 5500);
+  }
+
+  function stopAuto() {
+    clearInterval(autoTimer);
+    paused = true;
+  }
+
+  if (prevBtn) prevBtn.addEventListener("click", () => { stopAuto(); prev(); });
+  if (nextBtn) nextBtn.addEventListener("click", () => { stopAuto(); next(); });
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      stopAuto();
+      activate(parseInt(dot.dataset.dot, 10));
+    });
+  });
+
+  // Soporte touch/swipe
+  let touchStartX = 0;
+  carousel.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  carousel.addEventListener("touchend", (e) => {
+    const delta = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) { stopAuto(); delta > 0 ? next() : prev(); }
+  }, { passive: true });
+
+  startAuto();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderChrome();
   renderFeaturedProducts();
@@ -285,4 +343,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindWaitlistForms();
   renderYear();
   initHomeMotion();
+  initHeroCarousel();
 });

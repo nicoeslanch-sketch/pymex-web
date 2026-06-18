@@ -16,65 +16,109 @@
 <div data-header></div>
 
 <main>
-  <section class="hero section-dark">
-    <div class="container hero-layout">
-      <div class="hero-copy">
-        <div class="hero-socials reveal reveal-up stagger-1" aria-label="Redes sociales ADS Veris">
-          <span class="hero-socials-label">Redes sociales</span>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram ADS Veris">
-            <img src="assets/images/icon-instagram.png" alt="Instagram">
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn ADS Veris">
-            <img src="assets/images/icon-linkedin.png" alt="LinkedIn">
-          </a>
-          <a href="https://wa.me/56948217345" target="_blank" rel="noreferrer" aria-label="WhatsApp ADS Veris">
-            <img src="assets/images/icon-whatsapp.png" alt="WhatsApp">
-          </a>
-        </div>
-        <span class="eyebrow reveal reveal-up stagger-2">ADS Veris</span>
-        <h1 class="reveal reveal-up stagger-3">Tus números no solo deben cuadrar. Deben hablar.</h1>
-        <p class="hero-lead reveal reveal-up stagger-4">Herramientas empresariales con lógica de análisis para ordenar, visualizar y comprender mejor una PyME.</p>
-        <p class="hero-summary reveal reveal-up stagger-5">Hoy la entrada es por plantillas empresariales. La visión de fondo es construir una plataforma capaz de leer con más profundidad la información financiera del negocio.</p>
-        <div class="hero-actions reveal reveal-up stagger-6">
-          <a class="btn btn-primary" href="tienda.html">Ver catálogo</a>
-          <a class="btn btn-secondary" href="nosotros.html">Conocer ADS Veris</a>
-        </div>
-        <div class="tag-row reveal reveal-up stagger-6">
-          <span class="tag">Orden</span>
-          <span class="tag">Visualización</span>
-          <span class="tag">Lectura inicial del negocio</span>
+  <section class="hero-carousel section-dark">
+
+    <!-- Intro estático: socials + tagline de marca -->
+    <div class="container hero-intro">
+      <div class="hero-socials reveal reveal-up stagger-1" aria-label="Redes sociales ADS Veris">
+        <span class="hero-socials-label">Redes sociales</span>
+        <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram ADS Veris">
+          <img src="assets/images/ista.png" alt="Instagram">
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn ADS Veris">
+          <img src="assets/images/icon-linkedin.png" alt="LinkedIn">
+        </a>
+        <a href="https://wa.me/56948217345" target="_blank" rel="noreferrer" aria-label="WhatsApp ADS Veris">
+          <img src="assets/images/wasap.png" alt="WhatsApp">
+        </a>
+      </div>
+      <span class="eyebrow reveal reveal-up stagger-2">ADS Veris</span>
+      <h1 class="reveal reveal-up stagger-3">Tus números no solo deben cuadrar. Deben hablar.</h1>
+      <p class="hero-lead reveal reveal-up stagger-4">Herramientas empresariales con lógica de análisis para ordenar, visualizar y comprender mejor una PyME.</p>
+      <p class="hero-summary reveal reveal-up stagger-5">Hoy la entrada es por plantillas empresariales. La visión de fondo es construir una plataforma capaz de leer con más profundidad la información financiera del negocio.</p>
+    </div>
+
+    <!-- Carrusel de servicios -->
+    <div class="carousel-viewport" id="heroCarousel">
+
+      <!-- Slide 1: Planillas Excel -->
+      <div class="carousel-slide is-active" data-slide="0">
+        <div class="container carousel-layout">
+          <div class="carousel-copy">
+            <span class="eyebrow carousel-service">Planillas Excel</span>
+            <h2 class="carousel-heading">Ordena tu negocio con planillas listas para usar.</h2>
+            <p class="carousel-desc">Herramientas Excel para caja, ventas, inventario, costos y gestión diaria. Descarga, completa y empieza a entender mejor tus números.</p>
+            <div class="carousel-actions">
+              <a class="btn btn-primary" href="tienda.html">Ver planillas</a>
+              <a class="btn btn-secondary" href="contacto.html">Pedir planilla personalizada</a>
+            </div>
+          </div>
+          <div class="carousel-visual">
+            <div class="carousel-img-wrap">
+              <img src="assets/images/pyme%20emprendedor.PNG" alt="Emprendedor gestionando su PyME con planillas Excel">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero-panel card reveal reveal-up stagger-4">
-        <div class="panel-topline">Del dato al criterio</div>
-        <div class="hero-photo-frame">
-          <img src="assets/images/trading-desk.jpg" alt="Mesa de trabajo con gráficos, computador y teléfono mostrando datos financieros">
-          <div class="hero-photo-copy">
-            <span>Herramientas reales</span>
-            <strong>Claridad que acompaña decisiones reales</strong>
+
+      <!-- Slide 2: Procesos -->
+      <div class="carousel-slide" data-slide="1">
+        <div class="container carousel-layout">
+          <div class="carousel-copy">
+            <span class="eyebrow carousel-service">Procesos</span>
+            <h2 class="carousel-heading">Transforma el desorden en procesos claros.</h2>
+            <p class="carousel-desc">Diagramamos, documentamos y mejoramos tus flujos de trabajo para que tu PyME opere con más orden, continuidad y eficiencia.</p>
+            <div class="carousel-actions">
+              <a class="btn btn-primary" href="contacto.html">Solicitar reunión</a>
+              <a class="btn btn-secondary" href="tienda.html">Ver servicio</a>
+            </div>
+          </div>
+          <div class="carousel-visual">
+            <div class="carousel-img-wrap">
+              <img src="assets/images/mesa%20desordenada.PNG" alt="Mesa de trabajo representando procesos a organizar">
+            </div>
           </div>
         </div>
-        <div class="kpi-grid">
-          <article class="kpi-card reveal reveal-up stagger-1">
-            <span>Ventas</span>
-            <strong>+12,4%</strong>
-            <p>El dato solo no basta. Importa entender qué lo está empujando y dónde puede sostenerse.</p>
-          </article>
-          <article class="kpi-card reveal reveal-up stagger-2">
-            <span>Caja</span>
-            <strong>18 días</strong>
-            <p>Ver la presión financiera antes de que explote permite decidir con más margen y menos urgencia.</p>
-          </article>
-        </div>
-        <div class="future-note">
-          <div>
-            <strong>Reserva temprana</strong>
-            <p>Si quieres seguir de cerca la futura capa de análisis y lectura automatizada, ya puedes dejar tu correo.</p>
+      </div>
+
+      <!-- Slide 3: Plataforma -->
+      <div class="carousel-slide" data-slide="2">
+        <div class="container carousel-layout">
+          <div class="carousel-copy">
+            <span class="eyebrow carousel-service">Plataforma de análisis</span>
+            <h2 class="carousel-heading">Próximamente: datos limpios, claros y accionables.</h2>
+            <p class="carousel-desc">Estamos construyendo una plataforma para subir tus datos, limpiarlos, visualizarlos y recibir interpretación con IA para tomar mejores decisiones.</p>
+            <div class="carousel-actions">
+              <a class="btn btn-primary" href="plataforma.html">Conocer plataforma</a>
+              <span class="btn btn-secondary carousel-btn-soon">Próximamente</span>
+            </div>
           </div>
-          <a class="text-link" href="plataforma.html">Ver plataforma de análisis</a>
+          <div class="carousel-visual">
+            <div class="carousel-img-wrap">
+              <img src="assets/images/emprendedora.PNG" alt="Emprendedora revisando análisis de datos de su empresa">
+            </div>
+          </div>
         </div>
+      </div>
+
+      <button class="carousel-arrow carousel-prev" id="heroPrev" aria-label="Slide anterior">&#8249;</button>
+      <button class="carousel-arrow carousel-next" id="heroNext" aria-label="Siguiente slide">&#8250;</button>
+    </div>
+
+    <!-- Dots + tags -->
+    <div class="container carousel-footer">
+      <div class="carousel-dots" id="heroDots">
+        <button class="carousel-dot is-active" data-dot="0" aria-label="Ver slide 1"></button>
+        <button class="carousel-dot" data-dot="1" aria-label="Ver slide 2"></button>
+        <button class="carousel-dot" data-dot="2" aria-label="Ver slide 3"></button>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Orden</span>
+        <span class="tag">Visualización</span>
+        <span class="tag">Lectura inicial del negocio</span>
       </div>
     </div>
+
   </section>
 
   <section class="section section-dark comparison-band reveal-group">
