@@ -1327,14 +1327,22 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 }
 
 /* ── HERO CAROUSEL ──────────────────────────────────── */
-.hero-carousel { padding: 40px 0 36px; }
+.hero-carousel {
+  padding: 36px 0 0;
+  background:
+    linear-gradient(rgba(108, 141, 168, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 141, 168, 0.07) 1px, transparent 1px),
+    linear-gradient(160deg, #0d2235 0%, #1a3a52 55%, #0f2a3f 100%);
+  background-size: 48px 48px, 48px 48px, auto;
+  border-bottom: 1px solid rgba(247, 199, 95, 0.12);
+}
 .hero-carousel .hero-socials { margin-bottom: 24px; }
 
 /* Apila todos los slides en la misma celda de grid */
 .carousel-viewport {
   position: relative;
   display: grid;
-  overflow: visible;
+  overflow: hidden;
 }
 .carousel-slide {
   grid-area: 1 / 1;
@@ -1355,39 +1363,124 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 40px;
   align-items: center;
-  padding: 20px 0 52px;
+  padding: 20px 0 56px;
   min-height: clamp(580px, 68vh, 720px);
 }
 
 /* Columna de texto */
-.carousel-copy {
-  display: flex;
-  flex-direction: column;
+.carousel-copy { display: flex; flex-direction: column; }
+
+.carousel-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(247, 199, 95, 0.1);
+  border: 1px solid rgba(247, 199, 95, 0.26);
+  color: #F7C75F;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
 }
-.carousel-service { margin-bottom: 14px; }
 .carousel-heading {
-  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin-bottom: 18px;
   max-width: 540px;
+  color: var(--text);
 }
+.c-gold { color: #F7C75F; }
+
 .carousel-desc {
-  font-size: 1rem;
+  font-size: 0.97rem;
   color: var(--muted);
   max-width: 480px;
-  line-height: 1.68;
-  margin-bottom: 28px;
+  line-height: 1.7;
+  margin-bottom: 22px;
 }
-.carousel-actions {
+
+/* Precio */
+.carousel-price {
   display: flex;
+  align-items: center;
   gap: 12px;
+  margin-bottom: 26px;
   flex-wrap: wrap;
 }
-.carousel-btn-soon {
-  opacity: 0.45;
-  cursor: default;
-  pointer-events: none;
+.price-amount {
+  font-family: var(--ff-head);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.price-soon {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: rgba(247, 199, 95, 0.85);
+}
+.price-badge {
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(67, 197, 158, 0.12);
+  border: 1px solid rgba(67, 197, 158, 0.3);
+  color: #43c59e;
+  font-size: 0.77rem;
+  font-weight: 700;
+}
+.price-badge-dev {
+  background: rgba(247, 199, 95, 0.1);
+  border-color: rgba(247, 199, 95, 0.25);
+  color: #F7C75F;
+}
+
+/* Botones dorados del carrusel */
+.carousel-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: #F7C75F;
+  color: #0d2235;
+  border: 2px solid #F7C75F;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px rgba(247, 199, 95, 0.22);
+  text-decoration: none;
+}
+.btn-gold:hover {
+  background: #f5bc40;
+  border-color: #f5bc40;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(247, 199, 95, 0.34);
+}
+.btn-gold-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: transparent;
+  color: #F7C75F;
+  border: 2px solid rgba(247, 199, 95, 0.42);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.btn-gold-outline:hover {
+  background: rgba(247, 199, 95, 0.1);
+  border-color: #F7C75F;
+  transform: translateY(-2px);
 }
 
 /* Columna de imagen — protagonista grande */
@@ -1405,8 +1498,8 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   position: relative;
   box-shadow:
     0 40px 90px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(199, 168, 106, 0.14);
-  background: radial-gradient(ellipse at 60% 40%, rgba(30, 72, 110, 0.7), rgba(10, 22, 38, 0.9));
+    0 0 0 1px rgba(247, 199, 95, 0.1);
+  background: radial-gradient(ellipse at 60% 40%, rgba(30, 72, 110, 0.7), rgba(10, 22, 38, 0.92));
 }
 .carousel-img-wrap::after {
   content: "";
@@ -1414,8 +1507,8 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   inset: 0;
   border-radius: 24px;
   background:
-    linear-gradient(180deg, transparent 60%, rgba(6, 16, 32, 0.42)),
-    linear-gradient(90deg, rgba(6, 16, 32, 0.16), transparent 28%);
+    linear-gradient(180deg, transparent 60%, rgba(6, 16, 32, 0.4)),
+    linear-gradient(90deg, rgba(6, 16, 32, 0.14), transparent 28%);
   pointer-events: none;
 }
 .carousel-img-wrap img {
@@ -1426,14 +1519,40 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   filter: saturate(0.92) contrast(1.03);
 }
 
+/* Contador top-right */
+.carousel-counter {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: var(--ff-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(247, 199, 95, 0.6);
+  letter-spacing: 0.12em;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Puntos decorativos de fondo */
+.carousel-decor { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.cdot { position: absolute; border-radius: 50%; display: block; }
+.cdot-1 { width: 14px; height: 14px; background: #F7C75F; top: 14%;    right: 14%;  opacity: 0.65; }
+.cdot-2 { width:  9px; height:  9px; background: #FF6B35; top: 28%;    right:  7%;  opacity: 0.55; }
+.cdot-3 { width: 12px; height: 12px; background: #F7C75F; bottom: 26%; right: 18%;  opacity: 0.48; }
+.cdot-4 { width:  7px; height:  7px; background: #FF6B35; bottom: 16%; right: 38%;  opacity: 0.6;  }
+.cdot-5 { width: 10px; height: 10px; background: #F7C75F; top: 42%;    left:  1.5%; opacity: 0.28; }
+.cdot-6 { width:  7px; height:  7px; background: #FF6B35; bottom: 32%; left:  4%;   opacity: 0.36; }
+.cdot-7 { width: 16px; height: 16px; background: #F7C75F; top:  7%;    right: 44%;  opacity: 0.2;  }
+.cdot-8 { width:  6px; height:  6px; background: #FF6B35; top: 58%;    right:  5%;  opacity: 0.5;  }
+
 /* Flechas de navegación */
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(10, 22, 38, 0.78);
-  border: 1px solid rgba(199, 168, 106, 0.3);
-  color: var(--gold);
+  border: 1px solid rgba(247, 199, 95, 0.3);
+  color: #F7C75F;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -1448,41 +1567,38 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   backdrop-filter: blur(10px);
 }
 .carousel-arrow:hover {
-  background: rgba(199, 168, 106, 0.18);
-  border-color: rgba(199, 168, 106, 0.55);
+  background: rgba(247, 199, 95, 0.18);
+  border-color: rgba(247, 199, 95, 0.6);
   transform: translateY(calc(-50% - 2px));
 }
 .carousel-prev { left: 14px; }
 .carousel-next { right: 14px; }
 
-/* Dots e indicadores */
+/* Dots indicadores */
 .carousel-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-bottom: 20px;
+  padding-bottom: 28px;
 }
 .carousel-dots {
   display: flex;
   gap: 8px;
-  margin-bottom: 22px;
+  padding: 20px 0 0;
 }
 .carousel-dot {
   width: 32px;
   height: 3px;
   border-radius: 2px;
-  background: rgba(199, 168, 106, 0.2);
+  background: rgba(247, 199, 95, 0.18);
   border: none;
   cursor: pointer;
   padding: 0;
   transition: background 0.32s, width 0.32s;
 }
 .carousel-dot.is-active {
-  background: var(--gold);
+  background: #F7C75F;
   width: 54px;
 }
 
-/* Responsive carousel ─────────── */
+/* Responsive */
 @media (max-width: 1080px) {
   .carousel-layout {
     grid-template-columns: 1fr;
@@ -1494,14 +1610,16 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
     justify-content: flex-start;
     height: clamp(300px, 52vw, 420px);
   }
+  .carousel-counter { top: 16px; right: 16px; }
 }
 @media (max-width: 760px) {
-  .hero-carousel { padding: 40px 0 24px; }
-  .hero-intro { padding-bottom: 28px; }
+  .hero-carousel { padding: 32px 0 0; }
   .carousel-layout { padding: 16px 0 36px; gap: 18px; }
   .carousel-visual { height: clamp(220px, 58vw, 320px); }
   .carousel-prev { left: 6px; }
   .carousel-next { right: 6px; }
   .carousel-arrow { width: 38px; height: 38px; font-size: 1.6rem; }
-  .carousel-heading { font-size: clamp(1.3rem, 5vw, 1.9rem); }
+  .carousel-heading { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+  .price-amount { font-size: clamp(1.3rem, 4vw, 1.7rem); }
+  .btn-gold, .btn-gold-outline { padding: 11px 18px; font-size: 0.88rem; }
 }

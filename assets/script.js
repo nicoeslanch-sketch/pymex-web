@@ -285,10 +285,16 @@ function initHeroCarousel() {
   const dots = document.querySelectorAll("#heroDots .carousel-dot");
   const prevBtn = document.getElementById("heroPrev");
   const nextBtn = document.getElementById("heroNext");
+  const counter = document.getElementById("heroCounter");
 
   let current = 0;
   let autoTimer = null;
   let paused = false;
+
+  function updateCounter() {
+    if (!counter) return;
+    counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+  }
 
   function activate(index) {
     slides[current].classList.remove("is-active");
@@ -296,6 +302,7 @@ function initHeroCarousel() {
     current = (index + slides.length) % slides.length;
     slides[current].classList.add("is-active");
     dots[current].classList.add("is-active");
+    updateCounter();
   }
 
   function next() { activate(current + 1); }
@@ -322,6 +329,12 @@ function initHeroCarousel() {
     });
   });
 
+  // Navegación por teclado (flechas ← →)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft")  { stopAuto(); prev(); }
+    if (e.key === "ArrowRight") { stopAuto(); next(); }
+  });
+
   // Soporte touch/swipe
   let touchStartX = 0;
   carousel.addEventListener("touchstart", (e) => {
@@ -332,6 +345,7 @@ function initHeroCarousel() {
     if (Math.abs(delta) > 50) { stopAuto(); delta > 0 ? next() : prev(); }
   }, { passive: true });
 
+  updateCounter();
   startAuto();
 }
 
