@@ -1,3 +1,6 @@
+// TODO: reemplazar por link real de WhatsApp cuando esté disponible
+const WHATSAPP_URL = "#";
+
 function getProducts() {
   return window.ADS_VERIS_PRODUCTS || [];
 }
@@ -349,6 +352,13 @@ function initHeroCarousel() {
   startAuto();
 }
 
+function bindWhatsappButtons() {
+  document.querySelectorAll(".js-whatsapp-contact").forEach((btn) => {
+    btn.href = WHATSAPP_URL;
+    if (WHATSAPP_URL !== "#") btn.target = "_blank";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderChrome();
   renderFeaturedProducts();
@@ -358,4 +368,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderYear();
   initHomeMotion();
   initHeroCarousel();
+  bindWhatsappButtons();
 });
