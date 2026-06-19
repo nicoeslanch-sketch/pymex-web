@@ -2346,6 +2346,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 .excel-visual { position: relative; }
 .excel-img-wrap {
   position: relative;
+  aspect-ratio: 5 / 4;
   border-radius: 28px;
   overflow: hidden;
   background: linear-gradient(155deg, #0d2237, #1a3d5c);
@@ -2357,7 +2358,6 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
   pointer-events: none;
   border-radius: inherit;
   background:
@@ -2365,12 +2365,13 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
     linear-gradient(90deg, rgba(6, 18, 34, 0.1) 0%, transparent 28%);
 }
 .excel-main-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: clamp(420px, 46vw, 560px);
+  height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
-  filter: saturate(0.88) contrast(1.03);
 }
 /* Excel spreadsheet icon badge */
 .excel-icon-badge {
@@ -2516,7 +2517,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   }
   .excel-copy { order: 1; }
   .excel-visual { order: 2; }
-  .excel-main-img { height: clamp(340px, 56vw, 480px); }
+  .excel-img-wrap { aspect-ratio: 4 / 3; }
   .excel-tag-1 { bottom: 170px; }
   .excel-tag-2 { bottom: 133px; }
   .excel-tag-3 { bottom: 96px; }
@@ -2525,7 +2526,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 @media (max-width: 520px) {
   .excel-templates-section { padding: 64px 0 68px; }
   .excel-benefits { gap: 8px; }
-  .excel-main-img { height: clamp(300px, 72vw, 400px); }
+  .excel-img-wrap { aspect-ratio: 3 / 2; }
   .excel-card-dashboard { min-width: 138px; padding: 9px 11px; }
   .excel-card-label { font-size: 0.63rem; }
   .excel-card-row { font-size: 0.72rem; gap: 10px; }
