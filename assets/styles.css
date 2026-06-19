@@ -2346,7 +2346,6 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 .excel-visual { position: relative; }
 .excel-img-wrap {
   position: relative;
-  height: clamp(420px, 46vw, 560px);
   border-radius: 28px;
   overflow: hidden;
   background: linear-gradient(155deg, #0d2237, #1a3d5c);
@@ -2366,13 +2365,11 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
     linear-gradient(90deg, rgba(6, 18, 34, 0.1) 0%, transparent 28%);
 }
 .excel-main-img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  height: clamp(420px, 46vw, 560px);
   object-fit: cover;
   object-position: center top;
-  z-index: 1;
+  display: block;
   filter: saturate(0.88) contrast(1.03);
 }
 /* Excel spreadsheet icon badge */
@@ -2519,7 +2516,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   }
   .excel-copy { order: 1; }
   .excel-visual { order: 2; }
-  .excel-img-wrap { height: clamp(340px, 56vw, 480px); }
+  .excel-main-img { height: clamp(340px, 56vw, 480px); }
   .excel-tag-1 { bottom: 170px; }
   .excel-tag-2 { bottom: 133px; }
   .excel-tag-3 { bottom: 96px; }
@@ -2528,7 +2525,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 @media (max-width: 520px) {
   .excel-templates-section { padding: 64px 0 68px; }
   .excel-benefits { gap: 8px; }
-  .excel-img-wrap { height: clamp(300px, 72vw, 400px); }
+  .excel-main-img { height: clamp(300px, 72vw, 400px); }
   .excel-card-dashboard { min-width: 138px; padding: 9px 11px; }
   .excel-card-label { font-size: 0.63rem; }
   .excel-card-row { font-size: 0.72rem; gap: 10px; }
