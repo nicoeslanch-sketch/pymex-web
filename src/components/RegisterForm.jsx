@@ -63,18 +63,25 @@ export default function RegisterForm() {
 
     setLoading(true)
     try {
-      const { data, error: signUpError } = await supabase.auth.signUp({ email: form.email, password: form.password })
+      const userMetadata = {
+        full_name: `${form.nombre.trim()} ${form.apellido.trim()}`,
+        rut: form.rut,
+        phone: form.telefono,
+        plan_id: 'free',
+      }
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: form.email,
+        password: form.password,
+        options: { data: userMetadata },
+      })
       if (signUpError) throw signUpError
       const userId = data.user?.id
       if (userId) {
         const { error: metaError } = await supabase.from('users_metadata').insert({
           user_id: userId,
-          full_name: `${form.nombre.trim()} ${form.apellido.trim()}`,
-          rut: form.rut,
-          phone: form.telefono,
-          plan_id: 'free',
+          ...userMetadata,
         })
-        if (metaError) throw metaError
+        if (metaError) console.warn('No se pudo guardar users_metadata:', metaError.message)
       }
       setSuccess(true)
     } catch (err) {

@@ -27,16 +27,17 @@ export default function Profile() {
 
         setUsuario(session.user)
 
+        const authMetadata = metadataFromAuth(session.user)
         const { data, error: mErr } = await supabase
           .from('users_metadata')
           .select('*')
           .eq('user_id', session.user.id)
           .single()
 
-        if (mErr) throw mErr
-        setMetadata(data)
+        const perfil = mErr ? authMetadata : { ...authMetadata, ...data }
+        setMetadata(perfil)
 
-        const nombre = data.full_name || session.user.email
+        const nombre = perfil.full_name || session.user.email
         localStorage.setItem('adsveris_user', JSON.stringify({
           name: nombre,
           email: session.user.email,
@@ -141,6 +142,16 @@ export default function Profile() {
       </main>
     </div>
   )
+}
+
+function metadataFromAuth(user) {
+  const data = user?.user_metadata || {}
+  return {
+    full_name: data.full_name || user?.email || '',
+    rut: data.rut || '',
+    phone: data.phone || '',
+    plan_id: data.plan_id || 'free',
+  }
 }
 
 function Fila({ label, valor, badge }) {

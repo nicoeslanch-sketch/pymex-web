@@ -20,14 +20,14 @@ export default function Dashboard() {
 
         setUsuario(session.user)
 
+        const authMetadata = metadataFromAuth(session.user)
         const { data, error: metaError } = await supabase
           .from('users_metadata')
           .select('*')
           .eq('user_id', session.user.id)
           .single()
 
-        if (metaError) throw metaError
-        setMetadata(data)
+        setMetadata(metaError ? authMetadata : { ...authMetadata, ...data })
       } catch (err) {
         setError(err.message || 'Error al cargar los datos.')
       } finally {
@@ -104,6 +104,16 @@ export default function Dashboard() {
       </main>
     </div>
   )
+}
+
+function metadataFromAuth(user) {
+  const data = user?.user_metadata || {}
+  return {
+    full_name: data.full_name || user?.email || '',
+    rut: data.rut || '',
+    phone: data.phone || '',
+    plan_id: data.plan_id || 'free',
+  }
 }
 
 function Fila({ label, valor, badge }) {
