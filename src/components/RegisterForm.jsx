@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
+import logoImg from '../../assets/images/logo-ads-veris.png'
+import senialandoImg from '../../assets/images/señalando.png'
+import tabletImg from '../../assets/images/dibujo con tablet.png'
 
 function validarRut(rut) {
   const clean = rut.replace(/[.\-]/g, '').toUpperCase()
@@ -87,7 +90,7 @@ export default function RegisterForm() {
         <div style={s.grid} aria-hidden="true" />
         <header style={s.header}>
           <a href="/" style={s.logoWrap}>
-            <img src="/assets/images/logo-ads-veris.png" alt="ADS Veris" style={s.logoImg} />
+            <img src={logoImg} alt="ADS Veris" style={s.logoImg} />
             <span style={s.logoText}>ADS <span style={s.logoGold}>Veris</span></span>
           </a>
         </header>
@@ -110,7 +113,7 @@ export default function RegisterForm() {
       {/* Header */}
       <header style={s.header}>
         <a href="/" style={s.logoWrap}>
-          <img src="/assets/images/logo-ads-veris.png" alt="ADS Veris" style={s.logoImg} />
+          <img src={logoImg} alt="ADS Veris" style={s.logoImg} />
           <span style={s.logoText}>ADS <span style={s.logoGold}>Veris</span></span>
         </a>
         <a href="/login" style={s.headerLink}>¿Ya tienes cuenta? <span style={s.headerLinkGold}>Inicia sesión</span></a>
@@ -126,7 +129,7 @@ export default function RegisterForm() {
 
             {/* Imagen señalando (apunta hacia el formulario) */}
             <img
-              src="/assets/images/señalando.png"
+              src={senialandoImg}
               alt="Señalando el formulario de registro"
               style={s.imgSeñalando}
             />
@@ -134,7 +137,7 @@ export default function RegisterForm() {
             {/* Imagen dibujo con tablet (tarjeta flotante) */}
             <div style={s.tabletCard}>
               <img
-                src="/assets/images/dibujo con tablet.png"
+                src={tabletImg}
                 alt="Ilustración tablet"
                 style={s.imgTablet}
               />
