@@ -86,9 +86,17 @@ export default function RegisterForm() {
       }
       setSuccess(true)
     } catch (err) {
-      const msg = err?.message && err.message.trim() !== '{}' && err.message.trim() !== ''
+      console.error('Error registro completo:', JSON.stringify(err), err)
+      const status = err?.status
+      let msg = err?.message && err.message.trim() !== '{}' && err.message.trim() !== ''
         ? err.message
-        : 'Error al registrarse. Intenta de nuevo.'
+        : null
+
+      if (!msg) {
+        if (status === 429 || msg?.includes('rate')) msg = 'Demasiados intentos. Espera unos minutos e intenta de nuevo.'
+        else if (status === 422) msg = 'El email ya está registrado. Intenta iniciar sesión.'
+        else msg = 'Error al registrarse. Intenta de nuevo.'
+      }
       setErrorGeneral(msg)
     } finally {
       setLoading(false)
