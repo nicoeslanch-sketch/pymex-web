@@ -69,13 +69,13 @@ export default function RegisterForm() {
         phone: form.telefono,
         plan_id: 'free',
       }
-      saveLocalProfile(form.email, userMetadata)
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: form.email,
         password: form.password,
         options: { data: userMetadata },
       })
       if (signUpError) throw signUpError
+      saveLocalProfile(form.email, userMetadata)
       const userId = data.user?.id
       if (userId) {
         const { error: metaError } = await supabase.from('users_metadata').insert({
@@ -86,7 +86,10 @@ export default function RegisterForm() {
       }
       setSuccess(true)
     } catch (err) {
-      setErrorGeneral(err.message || 'Error al registrarse. Intenta de nuevo.')
+      const msg = err?.message && err.message.trim() !== '{}' && err.message.trim() !== ''
+        ? err.message
+        : 'Error al registrarse. Intenta de nuevo.'
+      setErrorGeneral(msg)
     } finally {
       setLoading(false)
     }
