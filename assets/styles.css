@@ -3510,8 +3510,8 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 
 .prp-hero { padding: 48px 0 20px; }
 .prp-hero .page-shell {
-  max-width: 940px;
-  padding: 22px 28px 24px;
+  max-width: var(--max);
+  padding: 18px 24px 20px;
   border-color: rgba(240,106,91,0.38);
   background:
     radial-gradient(circle at 88% 18%, rgba(240,106,91,0.18), transparent 26%),
@@ -3526,7 +3526,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
     "title"
     "lead"
     "actions";
-  row-gap: 12px;
+  row-gap: 9px;
   align-items: stretch;
 }
 .prp-hero .breadcrumbs {
@@ -3546,7 +3546,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   grid-area: lead;
   max-width: 100%;
   margin-bottom: 0;
-  padding: 13px 16px;
+  padding: 11px 16px;
   border-radius: 14px;
   background: rgba(255,255,255,0.055);
   border: 1px solid rgba(255,255,255,0.14);
@@ -3556,7 +3556,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 2px;
+  margin-top: 4px;
   grid-area: actions;
   justify-content: flex-start;
 }
@@ -3757,7 +3757,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 }
 @media (max-width: 760px) {
   .prp-hero .page-shell {
-    padding: 22px 20px 24px;
+    padding: 20px 18px 22px;
   }
   .prp-hero-actions {
     margin-top: 8px;
@@ -3766,6 +3766,56 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   .prp-why-card-wide { grid-column: 1; }
   .prp-service-inner { grid-template-columns: 1fr; gap: 28px; }
   .prp-steps-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .container {
+    width: min(calc(100% - 24px), var(--max));
+  }
+  .page-hero {
+    padding: 38px 0 18px;
+  }
+  .page-shell,
+  .hero-panel,
+  .help-banner-card {
+    border-radius: 18px;
+    padding: 20px;
+  }
+  .page-title-compact,
+  .wp-hero .page-title-compact,
+  .prp-hero .page-title-compact {
+    font-size: clamp(1.55rem, 8vw, 2.15rem);
+  }
+  .page-lead-compact,
+  .wp-hero .page-lead-compact,
+  .prp-hero .page-lead-compact {
+    font-size: 0.9rem;
+    line-height: 1.58;
+  }
+  main img,
+  .card img {
+    max-width: 100%;
+  }
+  .btn,
+  button.btn {
+    min-height: 44px;
+  }
+  .prp-hero-actions,
+  .wp-cta-actions,
+  .hlp-cta-actions {
+    width: 100%;
+  }
+  .prp-hero-actions .btn,
+  .wp-cta-actions .btn,
+  .hlp-cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 @media (max-width: 640px) {
   .prp-cta-inner { flex-direction: column; align-items: flex-start; }

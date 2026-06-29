@@ -98,7 +98,7 @@ export default function KommoContactForm({ isOpen = true, onClose, defaultServic
   }
 
   return (
-    <div style={s.overlay} role="presentation" onClick={canClose ? onClose : undefined}>
+    <div style={{ ...s.overlay, ...(isCompact ? s.overlayCompact : {}) }} role="presentation" onClick={canClose ? onClose : undefined}>
       <section
         style={{ ...s.modal, ...(isCompact ? s.modalCompact : {}) }}
         role="dialog"
@@ -251,6 +251,11 @@ const s = {
     backdropFilter: 'blur(12px)',
     fontFamily: "'Poppins', 'Manrope', sans-serif",
   },
+  overlayCompact: {
+    alignItems: 'flex-start',
+    padding: '12px',
+    overflowY: 'auto',
+  },
   modal: {
     width: 'min(94vw, 820px)',
     maxHeight: '92vh',
@@ -263,7 +268,8 @@ const s = {
     boxShadow: '0 26px 80px rgba(0,0,0,0.38)',
   },
   modalCompact: {
-    width: 'min(94vw, 430px)',
+    width: 'min(100%, 430px)',
+    maxHeight: 'none',
     gridTemplateColumns: '1fr',
   },
   brandPanel: {
@@ -277,7 +283,7 @@ const s = {
     overflow: 'hidden',
   },
   brandPanelCompact: {
-    minHeight: '210px',
+    minHeight: '230px',
     padding: '20px',
   },
   brandGlow: {
@@ -291,8 +297,8 @@ const s = {
     position: 'absolute',
     left: '50%',
     bottom: '-22px',
-    width: 'min(160%, 590px)',
-    maxHeight: '106%',
+    width: 'min(174%, 640px)',
+    maxHeight: '112%',
     objectFit: 'contain',
     objectPosition: 'center bottom',
     transform: 'translateX(-50%)',
@@ -300,10 +306,10 @@ const s = {
     pointerEvents: 'none',
   },
   agentImageCompact: {
-    width: '360px',
+    width: '390px',
     left: '50%',
     bottom: '-42px',
-    maxHeight: '280px',
+    maxHeight: '304px',
   },
   logoRow: {
     display: 'flex',
@@ -313,13 +319,13 @@ const s = {
     zIndex: 2,
   },
   logo: {
-    width: '34px',
-    height: '34px',
+    width: '46px',
+    height: '46px',
     objectFit: 'contain',
   },
   brandName: {
     color: '#f8fbfc',
-    fontSize: '20px',
+    fontSize: '22px',
     fontWeight: 800,
     letterSpacing: 0,
   },
