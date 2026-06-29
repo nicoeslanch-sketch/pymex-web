@@ -291,8 +291,8 @@ const s = {
     position: 'absolute',
     left: '50%',
     bottom: '-22px',
-    width: 'min(152%, 560px)',
-    maxHeight: '102%',
+    width: 'min(160%, 590px)',
+    maxHeight: '106%',
     objectFit: 'contain',
     objectPosition: 'center bottom',
     transform: 'translateX(-50%)',
@@ -300,10 +300,10 @@ const s = {
     pointerEvents: 'none',
   },
   agentImageCompact: {
-    width: '340px',
+    width: '360px',
     left: '50%',
     bottom: '-42px',
-    maxHeight: '265px',
+    maxHeight: '280px',
   },
   logoRow: {
     display: 'flex',
@@ -313,8 +313,8 @@ const s = {
     zIndex: 2,
   },
   logo: {
-    width: '44px',
-    height: '44px',
+    width: '34px',
+    height: '34px',
     objectFit: 'contain',
   },
   brandName: {

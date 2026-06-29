@@ -3510,8 +3510,8 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 
 .prp-hero { padding: 48px 0 20px; }
 .prp-hero .page-shell {
-  max-width: 920px;
-  padding: 24px 28px 26px;
+  max-width: 940px;
+  padding: 22px 28px 24px;
   border-color: rgba(240,106,91,0.38);
   background:
     radial-gradient(circle at 88% 18%, rgba(240,106,91,0.18), transparent 26%),
@@ -3519,14 +3519,14 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
     linear-gradient(135deg, rgba(7,18,34,0.96), rgba(21,32,46,0.96));
   box-shadow: 0 22px 60px rgba(0,0,0,0.24);
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "crumb crumb"
-    "eyebrow eyebrow"
-    "title lead"
-    "actions actions";
-  column-gap: 28px;
-  row-gap: 14px;
+    "crumb"
+    "eyebrow"
+    "title"
+    "lead"
+    "actions";
+  row-gap: 12px;
   align-items: stretch;
 }
 .prp-hero .breadcrumbs {
@@ -3538,17 +3538,16 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 }
 .prp-hero .page-title-compact {
   grid-area: title;
-  max-width: none;
+  max-width: 100%;
   margin-bottom: 0;
-  align-self: center;
   line-height: 1.12;
 }
 .prp-hero .page-lead-compact {
   grid-area: lead;
-  max-width: none;
+  max-width: 100%;
   margin-bottom: 0;
-  padding: 16px 18px;
-  border-radius: 16px;
+  padding: 13px 16px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.055);
   border: 1px solid rgba(255,255,255,0.14);
   color: #dbe7f1;
@@ -3559,7 +3558,7 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
   flex-wrap: wrap;
   margin-top: 2px;
   grid-area: actions;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .prp-hero-actions .btn {
   padding: 11px 18px;
@@ -3758,17 +3757,10 @@ body[data-page="home"] .stagger-6 { transition-delay: 0.34s; }
 }
 @media (max-width: 760px) {
   .prp-hero .page-shell {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "crumb"
-      "eyebrow"
-      "title"
-      "lead"
-      "actions";
+    padding: 22px 20px 24px;
   }
   .prp-hero-actions {
     margin-top: 8px;
-    justify-content: flex-start;
   }
   .prp-why-grid { grid-template-columns: 1fr; }
   .prp-why-card-wide { grid-column: 1; }
