@@ -29,9 +29,9 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 | Status | ID | Sort | Type | Color | Editable |
 | --- | ---: | ---: | ---: | --- | --- |
 | Leads Entrantes | `108238127` | 10 | 1 | `#c1c1c1` | false |
-| Contacto inicial | `108238131` | 20 | 0 | `#99ccff` | true |
-| Negociacion | `108238135` | 30 | 0 | `#ffff99` | true |
-| Tomar decision | `108238139` | 40 | 0 | `#ffcc66` | true |
+| Contacto planilla | `108238131` | 20 | 0 | `#fffeb2` | true |
+| Levantamiento planilla | `108238135` | 30 | 0 | `#fffeb2` | true |
+| Propuesta planilla | `108238139` | 40 | 0 | `#fffeb2` | true |
 | Logrado con exito | `142` | 10000 | 0 | `#CCFF66` | false |
 | Ventas Perdidos | `143` | 11000 | 0 | `#D5D8DB` | false |
 
@@ -44,9 +44,9 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 | Status | ID | Sort | Type | Color | Editable |
 | --- | ---: | ---: | ---: | --- | --- |
 | Leads Entrantes | `108239223` | 10 | 1 | `#c1c1c1` | false |
-| Contacto inicial | `108239227` | 20 | 0 | `#99ccff` | true |
-| Negociacion | `108239231` | 30 | 0 | `#ffff99` | true |
-| Tomar decision | `108239235` | 40 | 0 | `#ffcc66` | true |
+| Contacto web | `108239227` | 20 | 0 | `#fffeb2` | true |
+| Brief sitio web | `108239231` | 30 | 0 | `#fffeb2` | true |
+| Propuesta web | `108239235` | 40 | 0 | `#fffeb2` | true |
 | Logrado con exito | `142` | 10000 | 0 | `#CCFF66` | false |
 | Ventas Perdidos | `143` | 11000 | 0 | `#D5D8DB` | false |
 
@@ -59,10 +59,10 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 | Status | ID | Sort | Type | Color | Editable |
 | --- | ---: | ---: | ---: | --- | --- |
 | Leads Entrantes | `108239239` | 10 | 1 | `#c1c1c1` | false |
-| Contacto inicial | `108239243` | 20 | 0 | `#99ccff` | true |
-| Negociacion | `108239247` | 30 | 0 | `#ffff99` | true |
-| Tomar decision | `108239251` | 40 | 0 | `#ffcc66` | true |
-| Envio de cotizacion | `108246983` | 50 | 0 | `#f9deff` | true |
+| Contacto procesos | `108239243` | 20 | 0 | `#fffeb2` | true |
+| Diagnostico operativo | `108239247` | 30 | 0 | `#fffeb2` | true |
+| Propuesta de mejora | `108239251` | 40 | 0 | `#fffeb2` | true |
+| Cotizacion procesos | `108246983` | 50 | 0 | `#fffeb2` | true |
 | Logrado con exito | `142` | 10000 | 0 | `#CCFF66` | false |
 | Ventas Perdidos | `143` | 11000 | 0 | `#D5D8DB` | false |
 
@@ -75,9 +75,9 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 | Status | ID | Sort | Type | Color | Editable |
 | --- | ---: | ---: | ---: | --- | --- |
 | Leads Entrantes | `108239307` | 10 | 1 | `#c1c1c1` | false |
-| Contacto inicial | `108239311` | 20 | 0 | `#99ccff` | true |
-| Negociacion | `108239315` | 30 | 0 | `#ffff99` | true |
-| Tomar decision | `108239319` | 40 | 0 | `#ffcc66` | true |
+| Contacto plataforma | `108239311` | 20 | 0 | `#fffeb2` | true |
+| Levantamiento datos | `108239315` | 30 | 0 | `#fffeb2` | true |
+| Propuesta dashboard | `108239319` | 40 | 0 | `#fffeb2` | true |
 | Logrado con exito | `142` | 10000 | 0 | `#CCFF66` | false |
 | Ventas Perdidos | `143` | 11000 | 0 | `#D5D8DB` | false |
 
@@ -125,10 +125,13 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 
 ## Implementation Notes
 
-- For new website leads, use the operational `Contacto inicial` status IDs, not the incoming `Leads Entrantes` status IDs.
+- For new website leads, use the operational first-contact status IDs, not the incoming `Leads Entrantes` status IDs.
 - Current service routing:
   - Planilla Excel Personalizada: pipeline `14023387`, status `108238131`, tag `22508`.
   - Pagina Web: pipeline `14023535`, status `108239227`, tag `22510`.
   - Optimizacion de Procesos: pipeline `14023539`, status `108239243`, tag `22512`.
   - Plataforma de Analisis: pipeline `14023551`, status `108239311`, tag `22514`.
 - Closed statuses `142` and `143` are shared across pipelines.
+- Web integration assigns service tags automatically when creating a lead.
+- Kommo allowed renaming editable statuses through `PATCH /api/v4/leads/pipelines/{pipeline_id}/statuses/{status_id}`. It rejected color-only updates with HTTP 400, and name updates returned editable statuses with color `#fffeb2`.
+- `Embudo de ventas` was not modified.

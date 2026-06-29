@@ -3,21 +3,29 @@ const SERVICES = {
     label: 'Planilla Excel Personalizada',
     pipeline_id: 14023387,
     status_id: 108238131,
+    tag_id: 22508,
+    tag_name: 'Planillas',
   },
   web: {
     label: 'Pagina Web',
     pipeline_id: 14023535,
     status_id: 108239227,
+    tag_id: 22510,
+    tag_name: 'Paginas web',
   },
   procesos: {
     label: 'Optimizacion de Procesos',
     pipeline_id: 14023539,
     status_id: 108239243,
+    tag_id: 22512,
+    tag_name: 'Procesos',
   },
   plataforma: {
     label: 'Plataforma de Analisis',
     pipeline_id: 14023551,
     status_id: 108239311,
+    tag_id: 22514,
+    tag_name: 'Plataforma',
   },
 }
 
@@ -81,6 +89,9 @@ async function createLead({ kommoBaseUrl, headers, service, name, includeStatus 
       pipeline_id: service.pipeline_id,
       price: 0,
       ...(includeStatus ? { status_id: service.status_id } : {}),
+      _embedded: {
+        tags: [{ id: service.tag_id }],
+      },
     },
   ]
 
@@ -232,6 +243,7 @@ export default async function handler(req, res) {
         `Servicio: ${service.label}`,
         `Pipeline asignado: ${service.pipeline_id}`,
         `Estado asignado: ${service.status_id}`,
+        `Etiqueta asignada: ${service.tag_name} (${service.tag_id})`,
         `Estado fallback: ${usedFallbackStatus ? 'si' : 'no'}`,
         `Nombre: ${name}`,
         `Email: ${email}`,
@@ -256,7 +268,7 @@ export default async function handler(req, res) {
 
     let confirmedLead = null
     if (leadId) {
-      const { response: confirmResponse, data: confirmData } = await requestJson(`${kommoBaseUrl}/api/v4/leads/${leadId}`, {
+      const { response: confirmResponse, data: confirmData } = await requestJson(`${kommoBaseUrl}/api/v4/leads/${leadId}?with=tags`, {
         method: 'GET',
         headers,
       })
@@ -270,6 +282,8 @@ export default async function handler(req, res) {
 
     const confirmedPipelineId = confirmedLead?.pipeline_id
     const confirmedStatusId = confirmedLead?.status_id
+    const confirmedTags = confirmedLead?._embedded?.tags || []
+    const tagOk = !leadId || confirmedTags.some(tag => tag.id === service.tag_id)
     const pipelineOk = !leadId || confirmedPipelineId === service.pipeline_id
 
     if (!pipelineOk) {
@@ -279,6 +293,7 @@ export default async function handler(req, res) {
         expectedStatusId: service.status_id,
         confirmedPipelineId,
         confirmedStatusId,
+        confirmedTags,
       })
       return res.status(502).json({
         success: false,
@@ -296,6 +311,10 @@ export default async function handler(req, res) {
       statusId: service.status_id,
       confirmedPipelineId,
       confirmedStatusId,
+      tagId: service.tag_id,
+      tagName: service.tag_name,
+      confirmedTags,
+      tagOk,
       usedFallbackStatus,
     })
 
@@ -308,6 +327,10 @@ export default async function handler(req, res) {
       statusId: service.status_id,
       confirmedPipelineId,
       confirmedStatusId,
+      tagId: service.tag_id,
+      tagName: service.tag_name,
+      confirmedTags,
+      tagOk,
       usedFallbackStatus,
       data,
     })
