@@ -314,13 +314,13 @@ const s = {
   logoRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: '18px',
+    gap: '8px',
     position: 'relative',
     zIndex: 2,
   },
   logo: {
-    width: '96px',
-    height: '96px',
+    width: '132px',
+    height: '132px',
     objectFit: 'contain',
     flex: '0 0 auto',
   },
