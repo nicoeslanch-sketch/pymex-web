@@ -314,18 +314,19 @@ const s = {
   logoRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px',
+    gap: '18px',
     position: 'relative',
     zIndex: 2,
   },
   logo: {
-    width: '46px',
-    height: '46px',
+    width: '96px',
+    height: '96px',
     objectFit: 'contain',
+    flex: '0 0 auto',
   },
   brandName: {
     color: '#f8fbfc',
-    fontSize: '22px',
+    fontSize: '28px',
     fontWeight: 800,
     letterSpacing: 0,
   },
