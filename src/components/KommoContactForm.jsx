@@ -317,7 +317,7 @@ const s = {
     flexWrap: 'nowrap',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    gap: '8px',
+    gap: 0,
     position: 'relative',
     zIndex: 2,
   },
@@ -334,6 +334,7 @@ const s = {
     letterSpacing: 0,
     lineHeight: 1,
     whiteSpace: 'nowrap',
+    marginLeft: '-34px',
   },
   goldText: {
     color: '#c9a84c',
