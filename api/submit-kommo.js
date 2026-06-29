@@ -89,13 +89,16 @@ export default async function handler(req, res) {
   ]
 
   try {
-    const response = await fetch(`https://${subdomain}.kommo.com/api/v4/leads/complex`, {
+    const kommoBaseUrl = `https://${subdomain}.kommo.com`
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'X-Account-ID': accountId,
+    }
+
+    const response = await fetch(`${kommoBaseUrl}/api/v4/leads/complex`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'X-Account-ID': accountId,
-      },
+      headers,
       body: JSON.stringify(payload),
     })
 
@@ -109,7 +112,38 @@ export default async function handler(req, res) {
       })
     }
 
-    return res.status(200).json({ success: true, data })
+    const lead = Array.isArray(data) ? data[0] : null
+    const leadId = lead?.id
+    const contactId = lead?.contact_id
+
+    if (leadId) {
+      const noteText = [
+        'Solicitud enviada desde pymex-web',
+        `Servicio: ${serviceType}`,
+        `Nombre: ${name}`,
+        `Email: ${email}`,
+        `Telefono: ${phone}`,
+      ].join('\n')
+
+      const noteResponse = await fetch(`${kommoBaseUrl}/api/v4/leads/${leadId}/notes`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify([
+          {
+            note_type: 'common',
+            params: { text: noteText },
+          },
+        ]),
+      })
+
+      if (!noteResponse.ok) {
+        const noteError = await noteResponse.json().catch(() => ({}))
+        console.warn('Kommo note warning:', leadId, noteResponse.status, noteError)
+      }
+    }
+
+    console.info('Kommo lead created:', { leadId, contactId, serviceType })
+    return res.status(200).json({ success: true, leadId, contactId, data })
   } catch (error) {
     console.error('Kommo submit error:', error)
     return res.status(500).json({
