@@ -1,95 +1,150 @@
-# Kommo Contactados Email Templates
+# Kommo Email Templates
 
-These are the default emails used by `api/kommo-contactados-webhook.js` when a lead reaches the `Contactados` status in a service pipeline.
+These templates support the automatic `Contactado` webhook and can also be copied into Kommo as manual email templates for the `Tema` selector in the email composer.
 
-The main `Embudo de ventas` is intentionally excluded.
+Kommo API endpoints tested for email templates returned `404`, so native `Tema` dropdown templates must be created inside Kommo's interface. The repo keeps the exact subjects, bodies and PDF mapping here so they can be copied consistently.
 
-## Planillas
+## Manual Setup In Kommo
 
-- Pipeline ID: `14023387`
-- Contactados status ID: `108238131`
-- Subject: `Ya recibimos tu solicitud de planilla personalizada`
+Create one email template per service in Kommo's email composer/templates area:
+
+| Template | Pipeline | Subject | PDF |
+| --- | --- | --- | --- |
+| `Excel_Personalizada` | Planillas | `Tu Sistema de Medicion a Medida` | `pdfs/ADS_Veris_Planillas_Excel.pdf` |
+| `Pagina_Web` | Paginas web | `Tu Pagina Web Profesional desde $39.990` | `pdfs/ADS_Veris_Paginas_Web.pdf` |
+| `Opt_Procesos` | Procesos | `Tus Procesos, Optimizados` | `pdfs/ADS_Veris_Procesos.pdf` |
+| `Plataforma_Analisis` | Plataforma | `Tu Analista de Datos Inteligente` | `pdfs/ADS_Veris_Plataforma_Analisis.pdf` |
+
+The first three PDFs exist in `pdfs/`. The platform PDF is referenced but is not currently present in the repo.
+
+## Excel Personalizada
+
+Subject: `Tu Sistema de Medicion a Medida`
 
 ```text
-Hola {{nombre}}, ya estamos revisando tu solicitud.
+Hola {{lead_name}},
 
-Gracias por contactarnos por una planilla Excel personalizada.
+Gracias por interesarte en nuestra Plantilla Personalizada.
 
-Vamos a revisar lo que necesitas ordenar, automatizar o visualizar para proponerte una herramienta simple, clara y util para tu operacion.
+Cansado de hojas de Excel desorganizadas?
+Nosotros disenamos la tuya desde cero.
 
-El siguiente paso es entender tus datos actuales, tus dolores principales y el resultado que quieres obtener.
+En una reunion de 1 hora definimos:
+- Que KPIs realmente importan en tu negocio
+- Como automatizar los calculos
+- Que reportes necesitas para tomar decisiones
 
-Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.
+El resultado: una plantilla unica, hecha para ti.
+Con formulas automaticas, dashboards visuales y 30 dias de soporte.
 
-ADS Veris
+Adjunto: ADS_Veris_Planillas_Excel.pdf
+
+Disponibilidad: lunes a viernes 10:00-18:00 CLT
+
+Agendamos?
+
+Team ADS Veris
 servicios@adsveris.com
 ```
 
-## Paginas Web
+## Pagina Web
 
-- Pipeline ID: `14023535`
-- Contactados status ID: `108239227`
-- Subject: `Ya recibimos tu solicitud de pagina web`
+Subject: `Tu Pagina Web Profesional desde $39.990`
 
 ```text
-Hola {{nombre}}, ya estamos revisando tu solicitud.
+Hola {{lead_name}},
 
-Gracias por contactarnos por una pagina web para tu pyme.
+Recibimos tu interes en una pagina web.
 
-Vamos a revisar el tipo de sitio que necesitas, el objetivo comercial y la mejor estructura para presentar tu negocio con claridad.
+Sin complicaciones. Sin sorpresas. Sin esperas.
 
-El siguiente paso es levantar el contenido base, referencias visuales y las secciones que deberia tener tu sitio.
+Nuestras paginas web para PyMEs incluyen:
+- Diseno responsive: movil, desktop y tablet
+- Formularios de contacto integrados
+- SEO basico incluido
+- Dominio y hosting 1 ano incluidos
+- Chat con WhatsApp integrado
 
-Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.
+Desde: $39.990, antes $55.000
+Entrega: 7 a 10 dias
 
-ADS Veris
+Adjunto: ADS_Veris_Paginas_Web.pdf
+
+Hablamos de tu proyecto?
+
+Team ADS Veris
 servicios@adsveris.com
 ```
 
-## Procesos
+## Optimizacion De Procesos
 
-- Pipeline ID: `14023539`
-- Contactados status ID: `108239243`
-- Subject: `Ya recibimos tu solicitud para ordenar procesos`
+Subject: `Tus Procesos, Optimizados`
 
 ```text
-Hola {{nombre}}, ya estamos revisando tu solicitud.
+Hola {{lead_name}},
 
-Gracias por contactarnos para trabajar en tus procesos.
+Los procesos ineficientes cuestan dinero.
 
-Vamos a revisar donde se produce el desorden operativo, que tareas se repiten y que partes del flujo conviene documentar, simplificar o automatizar.
+Analizamos tus flujos actuales y te entregamos:
+- Diagnostico de cuellos de botella
+- Diagrama de procesos mejorado, listo para implementar
+- Plan de accion paso a paso
+- Seguimiento por 60 dias
 
-El siguiente paso es entender como opera hoy tu equipo y detectar los puntos donde una mejora puede generar mas impacto.
+El tiempo invertido de tu lado suele ser 2 a 3 horas.
+El retorno: procesos mas rapidos, menos errores y mas claridad operativa.
 
-Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.
+Adjunto: ADS_Veris_Procesos.pdf
 
-ADS Veris
+Datos utiles:
+- Duracion estimada: 2 a 4 semanas de implementacion
+- Costo: inversion unica, sin suscripcion
+- Resultado: procesos documentados y automatizados
+
+Conversamos?
+
+Team ADS Veris
 servicios@adsveris.com
 ```
 
-## Plataforma
+## Plataforma De Analisis
 
-- Pipeline ID: `14023551`
-- Contactados status ID: `108239311`
-- Subject: `Ya recibimos tu solicitud de plataforma de analisis`
+Subject: `Tu Analista de Datos Inteligente`
 
 ```text
-Hola {{nombre}}, ya estamos revisando tu solicitud.
+Hola {{lead_name}},
 
-Gracias por contactarnos por una plataforma de analisis.
+Contratar un analista de datos cuesta caro.
+Nosotros tenemos una alternativa mas simple para empezar.
 
-Vamos a revisar que indicadores necesitas mirar, desde donde vienen tus datos y como convertir esa informacion en paneles utiles para decidir mejor.
+Nuestra plataforma te permite:
+- Subir tu Excel sin moverte de tu PC
+- Limpieza automatica de datos
+- Dashboards con tus KPIs reales
+- Chat con IA que interpreta tus datos
+- Recomendaciones automaticas segun tus numeros
 
-El siguiente paso es identificar tus fuentes de datos, metricas clave y usuarios que consultaran la plataforma.
+Ejemplo: Producto X no vende, considera sacarlo de circulacion.
+Ejemplo: exceso de efectivo detectado, reinvierte en una linea con mejor retorno.
 
-Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.
+Acceso: https://pymex-web.vercel.app
 
-ADS Veris
+Adjunto sugerido: ADS_Veris_Plataforma_Analisis.pdf
+
+Preguntas? Responde este correo y te ayudamos.
+
+Team ADS Veris
 servicios@adsveris.com
 ```
 
-## Manual Use
+## Automation Notes
 
-Kommo API automation sends these emails automatically from Vercel when the webhook fires.
-
-For manual use inside Kommo, copy the corresponding subject and body into a Kommo email template or into the lead email composer.
+- Automatic email endpoint: `api/kommo-contactados-webhook.js`.
+- Trigger status name in Kommo: `Contactado`.
+- Trigger status IDs:
+  - Planillas: `108238131`
+  - Paginas web: `108239227`
+  - Procesos: `108239243`
+  - Plataforma: `108239311`
+- SendGrid is used for automatic email delivery.
+- If SendGrid rejects the send, the webhook writes a fallback note into the lead with the manual template.

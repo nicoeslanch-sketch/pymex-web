@@ -1,41 +1,64 @@
 import sgMail from '@sendgrid/mail'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 
 const CONTACTADOS = {
   14023387: {
-    service: 'Planillas Excel personalizadas',
+    service: 'Planilla Excel personalizada',
     statusId: 108238131,
     marker: 'ADSVERIS_CONTACTADOS_EMAIL_PLANILLAS_V1',
-    subject: 'Ya recibimos tu solicitud de planilla personalizada',
-    intro: 'Gracias por contactarnos por una planilla Excel personalizada.',
-    body: 'Vamos a revisar lo que necesitas ordenar, automatizar o visualizar para proponerte una herramienta simple, clara y util para tu operacion.',
-    next: 'El siguiente paso es entender tus datos actuales, tus dolores principales y el resultado que quieres obtener.',
+    subject: 'Tu Sistema de Medicion a Medida',
+    pdfFile: 'ADS_Veris_Planillas_Excel.pdf',
+    paragraphs: [
+      'Gracias por interesarte en nuestra Plantilla Personalizada.',
+      'Cansado de hojas de Excel desorganizadas? Nosotros disenamos la tuya desde cero.',
+      'En una reunion de 1 hora definimos que KPIs realmente importan en tu negocio, como automatizar los calculos y que reportes necesitas para tomar decisiones.',
+      'El resultado: una plantilla unica, hecha para ti, con formulas automaticas, dashboards visuales y 30 dias de soporte.',
+      'Disponibilidad: lunes a viernes 10:00-18:00 CLT.',
+    ],
+    closing: 'Agendamos?',
   },
   14023535: {
     service: 'Paginas web para pymes',
     statusId: 108239227,
     marker: 'ADSVERIS_CONTACTADOS_EMAIL_WEB_V1',
-    subject: 'Ya recibimos tu solicitud de pagina web',
-    intro: 'Gracias por contactarnos por una pagina web para tu pyme.',
-    body: 'Vamos a revisar el tipo de sitio que necesitas, el objetivo comercial y la mejor estructura para presentar tu negocio con claridad.',
-    next: 'El siguiente paso es levantar el contenido base, referencias visuales y las secciones que deberia tener tu sitio.',
+    subject: 'Tu Pagina Web Profesional desde $39.990',
+    pdfFile: 'ADS_Veris_Paginas_Web.pdf',
+    paragraphs: [
+      'Recibimos tu interes en una pagina web.',
+      'Sin complicaciones. Sin sorpresas. Sin esperas.',
+      'Nuestras paginas web para PyMEs incluyen diseno responsive, formularios de contacto integrados, SEO basico, dominio + hosting 1 ano incluidos y chat con WhatsApp integrado.',
+      'Desde: $39.990, antes $55.000. Entrega estimada: 7 a 10 dias.',
+    ],
+    closing: 'Hablamos de tu proyecto?',
   },
   14023539: {
     service: 'Optimizacion de procesos',
     statusId: 108239243,
     marker: 'ADSVERIS_CONTACTADOS_EMAIL_PROCESOS_V1',
-    subject: 'Ya recibimos tu solicitud para ordenar procesos',
-    intro: 'Gracias por contactarnos para trabajar en tus procesos.',
-    body: 'Vamos a revisar donde se produce el desorden operativo, que tareas se repiten y que partes del flujo conviene documentar, simplificar o automatizar.',
-    next: 'El siguiente paso es entender como opera hoy tu equipo y detectar los puntos donde una mejora puede generar mas impacto.',
+    subject: 'Tus Procesos, Optimizados',
+    pdfFile: 'ADS_Veris_Procesos.pdf',
+    paragraphs: [
+      'Los procesos ineficientes cuestan dinero.',
+      'Analizamos tus flujos actuales y te entregamos diagnostico de cuellos de botella, diagrama de procesos mejorado, plan de accion paso a paso y seguimiento por 60 dias.',
+      'El tiempo invertido de tu lado suele ser 2 a 3 horas. El retorno: procesos mas rapidos, menos errores y mas claridad operativa.',
+      'Duracion estimada: 2 a 4 semanas de implementacion. Inversion unica, sin suscripcion.',
+    ],
+    closing: 'Conversamos?',
   },
   14023551: {
     service: 'Plataforma de analisis',
     statusId: 108239311,
     marker: 'ADSVERIS_CONTACTADOS_EMAIL_PLATAFORMA_V1',
-    subject: 'Ya recibimos tu solicitud de plataforma de analisis',
-    intro: 'Gracias por contactarnos por una plataforma de analisis.',
-    body: 'Vamos a revisar que indicadores necesitas mirar, desde donde vienen tus datos y como convertir esa informacion en paneles utiles para decidir mejor.',
-    next: 'El siguiente paso es identificar tus fuentes de datos, metricas clave y usuarios que consultaran la plataforma.',
+    subject: 'Tu Analista de Datos Inteligente',
+    pdfFile: 'ADS_Veris_Plataforma_Analisis.pdf',
+    paragraphs: [
+      'Contratar un analista de datos cuesta caro. Nosotros tenemos una alternativa mas simple para empezar.',
+      'Nuestra plataforma te permite subir tu Excel, limpiar datos, ver dashboards con KPIs reales, conversar con IA sobre tus numeros y recibir recomendaciones accionables.',
+      'Ejemplo: Producto X no vende, considera sacarlo de circulacion. Ejemplo: exceso de efectivo detectado, reinvierte en una linea con mejor retorno.',
+      'Puedes probar la plataforma desde https://pymex-web.vercel.app.',
+    ],
+    closing: 'Preguntas? Responde este correo y te ayudamos.',
   },
 }
 
@@ -162,6 +185,10 @@ async function addLeadNote(leadId, text) {
 }
 
 function emailHtml({ template, name }) {
+  const paragraphs = template.paragraphs
+    .map(paragraph => `<p style="margin:0 0 16px 0;font-size:15px;color:#374151;line-height:1.7;">${paragraph}</p>`)
+    .join('')
+
   return `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -180,10 +207,9 @@ function emailHtml({ template, name }) {
           <td style="padding:42px 40px;">
             <p style="margin:0 0 6px 0;font-size:12px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:0.1em;">Solicitud recibida</p>
             <h1 style="margin:0 0 20px 0;font-size:23px;font-weight:800;color:#09111f;">Hola ${name}, ya estamos revisando tu solicitud</h1>
-            <p style="margin:0 0 16px 0;font-size:15px;color:#374151;line-height:1.7;">${template.intro}</p>
-            <p style="margin:0 0 16px 0;font-size:15px;color:#374151;line-height:1.7;">${template.body}</p>
-            <p style="margin:0 0 26px 0;font-size:15px;color:#374151;line-height:1.7;">${template.next}</p>
-            <p style="margin:0;font-size:14px;color:#4b5563;line-height:1.7;">Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles que consideres importantes.</p>
+            ${paragraphs}
+            <p style="margin:0 0 26px 0;font-size:15px;color:#374151;line-height:1.7;">${template.closing}</p>
+            <p style="margin:0;font-size:14px;color:#4b5563;line-height:1.7;">Adjuntamos informacion del servicio. Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles que consideres importantes.</p>
           </td>
         </tr>
         <tr>
@@ -203,20 +229,42 @@ function emailText({ template, name }) {
   return [
     `Hola ${name}, ya estamos revisando tu solicitud.`,
     '',
-    template.intro,
-    template.body,
-    template.next,
+    ...template.paragraphs.flatMap(paragraph => [paragraph, '']),
+    template.closing,
     '',
-    'Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.',
+    'Adjuntamos informacion del servicio. Si quieres adelantarnos mas contexto, responde este correo con archivos, referencias o detalles importantes.',
     '',
     'ADS Veris',
     'servicios@adsveris.com',
   ].join('\n')
 }
 
+function getPdfAttachment(template) {
+  if (!template.pdfFile) return { attachments: [], missingPdf: null }
+
+  const filePath = join(process.cwd(), 'pdfs', template.pdfFile)
+  if (!existsSync(filePath)) {
+    return { attachments: [], missingPdf: template.pdfFile }
+  }
+
+  return {
+    attachments: [
+      {
+        content: readFileSync(filePath).toString('base64'),
+        filename: template.pdfFile,
+        type: 'application/pdf',
+        disposition: 'attachment',
+      },
+    ],
+    missingPdf: null,
+  }
+}
+
 async function sendContactadosEmail({ leadId, template, email, name }) {
   const sendgridApiKey = process.env.SENDGRID_API_KEY
   if (!sendgridApiKey) throw new Error('SENDGRID_API_KEY not configured')
+
+  const { attachments, missingPdf } = getPdfAttachment(template)
 
   sgMail.setApiKey(sendgridApiKey)
   await sgMail.send({
@@ -226,6 +274,7 @@ async function sendContactadosEmail({ leadId, template, email, name }) {
     subject: template.subject,
     text: emailText({ template, name }),
     html: emailHtml({ template, name }),
+    attachments,
   })
 
   await addLeadNote(
@@ -234,6 +283,7 @@ async function sendContactadosEmail({ leadId, template, email, name }) {
       template.marker,
       `Correo automatico Contactados enviado a ${email}`,
       `Asunto: ${template.subject}`,
+      attachments.length ? `PDF adjunto: ${template.pdfFile}` : `PDF pendiente/no encontrado: ${missingPdf || 'sin PDF configurado'}`,
     ].join('\n')
   )
 }
@@ -295,13 +345,15 @@ export default async function handler(req, res) {
               target.leadId,
               [
                 failureMarker,
-                'No se pudo enviar el correo automatico Contactados.',
+                'No se pudo enviar el correo automatico Contactado.',
                 `Error: ${error.message}`,
                 '',
                 'Plantilla manual sugerida:',
                 `Asunto: ${template.subject}`,
                 '',
                 emailText({ template, name: 'cliente' }),
+                '',
+                `PDF sugerido: ${template.pdfFile || 'sin PDF configurado'}`,
               ].join('\n')
             )
           }
