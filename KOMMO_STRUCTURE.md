@@ -161,7 +161,7 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 - Web integration assigns service tags automatically when creating a lead.
 - `api/kommo-contactados-webhook.js` sends a service-specific email when a lead reaches the `Contactado` status in a service pipeline.
 - Registered Kommo webhook ID: `47387135`.
-- The registered webhook has `add_lead` and `update_lead` enabled in Kommo, but the Vercel handler intentionally ignores `add` events and processes status updates only.
+- The registered webhook has `add_lead` and `update_lead` enabled in Kommo. The Vercel handler processes any lead event that is already in a service `Contactado` status, including website leads created directly in that status.
 - The Contactados webhook requires these Vercel Production env vars:
   - `KOMMO_WEBHOOK_SECRET`
   - `KOMMO_API_TOKEN`

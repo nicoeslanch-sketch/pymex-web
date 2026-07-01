@@ -305,7 +305,7 @@ export default async function handler(req, res) {
   const candidates = parseWebhookBody(req.body)
   const targets = candidates.filter(candidate => {
     const template = CONTACTADOS[candidate.pipelineId]
-    return template && candidate.event !== 'add' && candidate.statusId === template.statusId
+    return template && candidate.statusId === template.statusId
   })
 
   const results = []
