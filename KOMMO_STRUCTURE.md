@@ -151,7 +151,7 @@ Do not store API tokens in this file. Use Vercel environment variables or a loca
 
 ## Implementation Notes
 
-- For new website leads, use the operational first-contact status IDs, not the incoming `Leads Entrantes` status IDs.
+- For new website leads, create the lead in the service pipeline and then move it to the operational first-contact status. This keeps the final location correct and lets Kommo stage-entry triggers detect the move to `Contactado`.
 - Current service routing:
   - Planilla Excel Personalizada: pipeline `14023387`, status `108238131`, tag `22508`.
   - Pagina Web: pipeline `14023535`, status `108239227`, tag `22510`.

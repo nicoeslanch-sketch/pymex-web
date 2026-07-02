@@ -82,13 +82,12 @@ function logKommoError(label, status, data) {
   console.error(label, status, JSON.stringify(data, null, 2))
 }
 
-async function createLead({ kommoBaseUrl, headers, service, name, includeStatus }) {
+async function createLead({ kommoBaseUrl, headers, service, name }) {
   const leadPayload = [
     {
       name: `${service.label} - ${name}`,
       pipeline_id: service.pipeline_id,
       price: 0,
-      ...(includeStatus ? { status_id: service.status_id } : {}),
       _embedded: {
         tags: [{ id: service.tag_id }],
       },
@@ -99,6 +98,17 @@ async function createLead({ kommoBaseUrl, headers, service, name, includeStatus 
     method: 'POST',
     headers,
     body: JSON.stringify(leadPayload),
+  })
+}
+
+async function moveLeadToServiceStatus({ kommoBaseUrl, headers, service, leadId }) {
+  return requestJson(`${kommoBaseUrl}/api/v4/leads/${leadId}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({
+      pipeline_id: service.pipeline_id,
+      status_id: service.status_id,
+    }),
   })
 }
 
@@ -183,28 +193,12 @@ export default async function handler(req, res) {
       : contactData?._embedded?.contacts?.[0]
     const contactId = contact?.id
 
-    let { response, data } = await createLead({
+    const { response, data } = await createLead({
       kommoBaseUrl,
       headers,
       service,
       name,
-      includeStatus: true,
     })
-    let usedFallbackStatus = false
-
-    if (!response.ok && response.status === 400) {
-      logKommoError('Kommo lead status error, retrying with pipeline only:', response.status, data)
-      const fallback = await createLead({
-        kommoBaseUrl,
-        headers,
-        service,
-        name,
-        includeStatus: false,
-      })
-      response = fallback.response
-      data = fallback.data
-      usedFallbackStatus = true
-    }
 
     if (!response.ok) {
       logKommoError('Kommo API error:', response.status, data)
@@ -237,6 +231,29 @@ export default async function handler(req, res) {
       }
     }
 
+    let movedToServiceStatus = false
+    if (leadId) {
+      const { response: moveResponse, data: moveData } = await moveLeadToServiceStatus({
+        kommoBaseUrl,
+        headers,
+        service,
+        leadId,
+      })
+
+      if (!moveResponse.ok) {
+        logKommoError('Kommo lead status move error:', moveResponse.status, moveData)
+        return res.status(moveResponse.status).json({
+          success: false,
+          leadId,
+          contactId,
+          error: getKommoError(moveData, 'Lead creado, pero no se pudo mover a Contactado'),
+          details: moveData,
+        })
+      }
+
+      movedToServiceStatus = true
+    }
+
     if (leadId) {
       const noteText = [
         'Solicitud enviada desde pymex-web',
@@ -244,7 +261,7 @@ export default async function handler(req, res) {
         `Pipeline asignado: ${service.pipeline_id}`,
         `Estado asignado: ${service.status_id}`,
         `Etiqueta asignada: ${service.tag_name} (${service.tag_id})`,
-        `Estado fallback: ${usedFallbackStatus ? 'si' : 'no'}`,
+        `Movimiento a Contactado: ${movedToServiceStatus ? 'si' : 'no'}`,
         `Nombre: ${name}`,
         `Email: ${email}`,
         `Telefono: ${phone}`,
@@ -321,7 +338,7 @@ export default async function handler(req, res) {
       confirmedTags,
       tagOk,
       statusOk,
-      usedFallbackStatus,
+      movedToServiceStatus,
     })
 
     return res.status(200).json({
@@ -338,7 +355,7 @@ export default async function handler(req, res) {
       confirmedTags,
       tagOk,
       statusOk,
-      usedFallbackStatus,
+      movedToServiceStatus,
       data,
     })
   } catch (error) {
